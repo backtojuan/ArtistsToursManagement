@@ -1,13 +1,22 @@
 package model;
 
+/**
+ * This class manage the necessary attributes and methods to create cities that the tour might cover
+ * @author Lina Johanna Salinas
+ * @author Lina Marcela Acosta
+ * @author Maria Diomar Ordoñez
+ * @author Juan José Valencia
+ * @version 1.0 - November/2019 
+ */
 public class City {
 
 	private String name;
-	private Location location;
-
+	private Location continent;
+	private String country;
+	
 	public City(String name, Location location) {
 		this.name = name;
-		this.location = location;
+		this.continent = location;
 	}
 
 	public String getName() {
@@ -15,6 +24,6 @@ public class City {
 	}
 
 	public Location getLocation() {
-		return location;
+		return continent;
 	}
 }
