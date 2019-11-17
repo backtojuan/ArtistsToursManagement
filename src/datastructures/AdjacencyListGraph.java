@@ -25,7 +25,7 @@ public class AdjacencyListGraph {
 		}
 	}
 
-	public void addEgde(int source, int destination, int weight) {
+	public void addEdge(int source, int destination, int weight) {
 		Edge edge = new Edge(source, destination, weight);
 		adjacencylist[source].addFirst(edge); //for directed graph
 	}
