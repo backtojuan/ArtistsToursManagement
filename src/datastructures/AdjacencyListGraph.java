@@ -31,13 +31,16 @@ public class AdjacencyListGraph<Value> {
 			adjacencylist[i] = new LinkedList<>();
 		}
 	}
-	
 	/**
 	 * 
 	 * @param u
 	 */
 	public void addVertex(Value u) {
 		vertices.add(u);
+	}
+	public void addEdge(int source, int destination, int weight) {
+		Edge edge = new Edge(source, destination, weight);
+		adjacencylist[source].addFirst(edge); //for directed graph
 	}
 	
 	/**
@@ -64,4 +67,4 @@ public class AdjacencyListGraph<Value> {
 			}
 		}
 	}	
-}
+} 
