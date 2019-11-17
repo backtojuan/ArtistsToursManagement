@@ -1,5 +1,8 @@
 package gui;
 
+import datastructures.AdjacencyListGraph;
+import model.City;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -32,9 +35,14 @@ public class Main extends Application{
 		stage.show();
 	}
 
-	public static void main(String[] args) {
+	/**public static void main(String[] args) {
 		launch(args);
-	}
-
+	}*/
+	
+	public static void main(String[] args) {
+		
+		
+		
+		AdjacencyListGraph<City> citiesGraph = new AdjacencyListGraph<>(20);
+	}	
 }
-

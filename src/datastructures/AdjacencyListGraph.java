@@ -1,6 +1,7 @@
 package datastructures;
 
 import java.util.LinkedList;
+import java.util.ArrayList;
 
 /**
  * This class manage the necessary attributes and methods to create the graph representation
@@ -10,33 +11,57 @@ import java.util.LinkedList;
  * @author Juan José Valencia
  * @version 1.0 - November/2019 
  */
-public class AdjacencyListGraph {
+public class AdjacencyListGraph<Value> {
 
-	int vertices;
-	LinkedList<Edge> [] adjacencylist;
-
+	private int totalvertices;
+	
+	private ArrayList<Value> vertices;
+	private LinkedList<Edge> [] adjacencylist;
+	
 	@SuppressWarnings("unchecked")
-	AdjacencyListGraph(int vertices) {
-		this.vertices = vertices;
-		adjacencylist = new LinkedList[vertices];
+	/**
+	 * 
+	 * @param totalvertices
+	 */
+	public AdjacencyListGraph(int totalvertices) {
+		this.totalvertices = totalvertices;
+		adjacencylist = new LinkedList[totalvertices];
 		//initialize adjacency lists for all the vertices
-		for (int i = 0; i <vertices ; i++) {
+		for (int i = 0; i < totalvertices; i++) {
 			adjacencylist[i] = new LinkedList<>();
 		}
 	}
-
-	public void addEgde(int source, int destination, int weight) {
-		Edge edge = new Edge(source, destination, weight);
-		adjacencylist[source].addFirst(edge); //for directed graph
+	
+	/**
+	 * 
+	 * @param u
+	 */
+	public void addVertex(Value u) {
+		vertices.add(u);
 	}
-
-	public void printGraph(){
-		for (int i = 0; i <vertices ; i++) {
+	
+	/**
+	 * 
+	 * @param u
+	 * @param v
+	 * @param weight
+	 */
+	public void addEdge(int u,int v, double weight) {
+		Edge edge = new Edge(u, v,weight);
+		adjacencylist[u].add(edge); 
+		adjacencylist[v].add(edge);
+	}
+	
+	/**
+	 * 
+	 */
+	public void printGraph() {
+		for(int i=0;i<totalvertices;i++) {
 			LinkedList<Edge> list = adjacencylist[i];
-			for (int j = 0; j <list.size() ; j++) {
-				System.out.println("vertex-" + i + " is connected to " +
-						list.get(j).destination + " with weight " +  list.get(j).weight);
+			for (int j = 0; j < list.size(); j++) {
+				System.out.println("Vertex- " + i + "is connected to " +
+						list.get(j).getV() + "With weight" + list.get(j).getWeight());
 			}
 		}
-	}       
+	}	
 }

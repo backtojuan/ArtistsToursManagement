@@ -9,14 +9,44 @@ package datastructures;
  * @version 1.0 - November/2019 
  */
 public class Edge{
-	int source;
-	int destination;
-	int weight;
-
-	public Edge(int source, int destination, int weight) {
-		this.source = source;
-		this.destination = destination;
+	
+	private int u;
+	private int v;
+	private double weight;
+	
+	/**
+	 * 
+	 * @param u
+	 * @param v
+	 * @param weight
+	 */
+	public Edge(int u, int v,double weight) {
+		this.u = u;
+		this.v = v;
 		this.weight = weight;
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public int getU() {
+		return u;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public int getV() {
+		return v;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public double getWeight() {
+		return weight;
+	}
 }
-

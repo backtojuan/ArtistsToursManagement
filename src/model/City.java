@@ -10,19 +10,36 @@ package model;
  */
 public class City {
 
+	//atributte necesary to modeled the vertex inside the graph
+	private int id;
+	
+	//self attributes
 	private String name;
 	private Location continent;
 	private String country;
 	
+	/**
+	 * 
+	 * @param name
+	 * @param location
+	 */
 	public City(String name, Location location) {
 		this.name = name;
 		this.continent = location;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public Location getLocation() {
 		return continent;
 	}
