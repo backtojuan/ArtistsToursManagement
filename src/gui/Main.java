@@ -1,7 +1,15 @@
 package gui;
 
 import model.City;
+import model.Location;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+import datastructures.AdjacencyListGraph;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,7 +34,7 @@ public class Main extends Application{
 
 		Scene scene = new Scene(root);
 		stage.setTitle("¡Artists Tour Management!");
-		stage.setFullScreen(true);
+		stage.setResizable(false);
 		stage.setScene(scene);
 
 		Image icon = new Image("gui/imgs/icon.png");
@@ -34,13 +42,7 @@ public class Main extends Application{
 		stage.show();
 	}
 
-	/**public static void main(String[] args) {
-		launch(args);
-	}*/
-	
 	public static void main(String[] args) {
-		
-		
-	
-	}	
+		launch(args);
+	}
 }

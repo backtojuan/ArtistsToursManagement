@@ -1,5 +1,5 @@
 .button{
-	-fx-background-color: DARKGREEN; -fx-text-fill: white;
+	-fx-background-color: BLACK; -fx-text-fill: white;
 	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 }
 .label{
@@ -90,13 +90,13 @@
 }
 .tab-pane .tab
 {
-    -fx-background-color: #e6e6e6;
+    -fx-background-color: BLACK;
 
 }
 
 .tab-pane .tab:selected
 {
-    -fx-background-color: #3c3c3c;
+    -fx-background-color: BLACK;
 }
 
 .tab .tab-label { 
@@ -108,5 +108,5 @@
 
 .tab:selected .tab-label { 
     -fx-alignment: CENTER;
-    -fx-text-fill: #96b946;
+    -fx-text-fill: #828282;
 }

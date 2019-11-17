@@ -14,33 +14,51 @@ public class City {
 	private int id;
 	
 	//self attributes
-	private String name;
 	private Location continent;
 	private String country;
+	private String name;
 	
 	/**
 	 * 
 	 * @param name
 	 * @param location
 	 */
-	public City(String name, Location location) {
+	public City(int id, Location continent,String country,String name) {
+		this.id = id;
+		this.continent = continent;
+		this.country = country;
 		this.name = name;
-		this.continent = location;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public Location getContinent() {
+		return continent;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String getCountry() {
+		return country;
+	}
+	
 	/**
 	 * 
 	 * @return
 	 */
 	public String getName() {
 		return name;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public Location getLocation() {
-		return continent;
 	}
 }

@@ -25,6 +25,7 @@ public class AdjacencyListGraph<Value> {
 	 */
 	public AdjacencyListGraph(int totalvertices) {
 		this.totalvertices = totalvertices;
+		vertices = new ArrayList<>();
 		adjacencylist = new LinkedList[totalvertices];
 		//initialize adjacency lists for all the vertices
 		for (int i = 0; i < totalvertices; i++) {
@@ -62,8 +63,8 @@ public class AdjacencyListGraph<Value> {
 		for(int i=0;i<totalvertices;i++) {
 			LinkedList<Edge> list = adjacencylist[i];
 			for (int j = 0; j < list.size(); j++) {
-				System.out.println("Vertex- " + i + "is connected to " +
-						list.get(j).getV() + "With weight" + list.get(j).getWeight());
+				System.out.println("Vertex-" + i + " is connected to " +
+						list.get(j).getV() + " With weight " + list.get(j).getWeight());
 			}
 		}
 	}	
