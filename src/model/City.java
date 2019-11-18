@@ -15,6 +15,7 @@ public class City {
 	private String color;
 	public final static String WHITE = "W";
 	public final static String BLACK = "B";
+	public final static String GRAY = "G";
 	//self attributes
 	private Location continent;
 	private String country;

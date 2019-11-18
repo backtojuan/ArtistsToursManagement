@@ -1,8 +1,9 @@
 package model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.PriorityQueue;
+//import java.util.Queue;
 import java.util.LinkedList;
 
 import datastructures.AdjacencyListGraph;
@@ -49,6 +50,31 @@ public class Tour {
 	}
 	
 	//PRINCIPAL ALGORITHMS
+	
+	public void BFS(City city) {
+		for(int i = 0; i<graph.getVertices().size(); i++) {
+			graph.getVertices().get(i).setColor("W");
+			//graph.getVertices().get(i).setKey(Double.POSITIVE_INFINITY);
+			graph.getVertices().get(i).setPred(null);
+		}
+		city.setColor("G");
+		city.setKey(0);
+		city.setPred(null);
+		LinkedList<City> queue = new LinkedList<City>();
+		queue.offer(city);
+		while(queue != null) {
+			//City u = queue.poll();
+			/*for(int i = 0; i<graph.getVertices().get(i).get) {
+				/*if(i.getColor() == WHITE) {
+					i.getColor() = GRAY;
+					i.getDistancia() = u.distancia+1;
+					i.getPrecesor() = u;
+					Q.offer(i);
+				}
+			}
+			u.getColor() = BLACK;*/
+		}
+	}
 	
 	public void BFS(int s,int v) 
     { 
