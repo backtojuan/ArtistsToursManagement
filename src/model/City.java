@@ -12,22 +12,28 @@ public class City {
 
 	//atributte necesary to modeled the vertex inside the graph
 	private int id;
-	
+	private String color;
+	public final static String WHITE = "W";
+	public final static String BLACK = "B";
 	//self attributes
 	private Location continent;
 	private String country;
 	private String name;
-	
+	private City pred;
+	private int key;
 	/**
 	 * 
 	 * @param name
 	 * @param location
 	 */
-	public City(int id, Location continent,String country,String name) {
+	public City(int id, Location continent,String country,String name, String color, City pred, int key) {
 		this.id = id;
 		this.continent = continent;
 		this.country = country;
 		this.name = name;
+		this.color = color;
+		this.pred = pred;
+		this.key = key;
 	}
 
 	/**
@@ -60,5 +66,23 @@ public class City {
 	 */
 	public String getName() {
 		return name;
+	}
+	public String getColor() {
+		return color;
+	}
+	public void setKey(int k) {
+		key = k;
+	}
+	public void setPred(City p) {
+		pred = p;
+	}
+	public void setColor(String c) {
+		color = c;
+	}
+	public int getKey() {
+		return key;
+	}
+	public City getPred() {
+		return pred;
 	}
 }

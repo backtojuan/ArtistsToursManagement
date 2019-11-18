@@ -68,4 +68,7 @@ public class AdjacencyListGraph<Value> {
 			}
 		}
 	}	
+	public ArrayList<Value> getVertices() {
+		return vertices;
+	}
 } 

@@ -73,9 +73,9 @@ public class ArtistsTourManagementController {
 			String country = parts[1];
 			String name = parts[2];
 			
-			City city = new City(id, Location.EUROPE, country, name);
+			//City city = new City(id, Location.EUROPE, country, name);
 			
-			citiesgraph.addVertex(city);
+			//citiesgraph.addVertex(city);
 			line = br.readLine();
 		}
 		
