@@ -67,5 +67,5 @@ public class AdjacencyListGraph<Value> {
 						list.get(j).getV() + " With weight " + list.get(j).getWeight());
 			}
 		}
-	}	
+	}
 } 

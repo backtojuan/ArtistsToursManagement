@@ -43,4 +43,6 @@ public class Tour {
 	public void setArtist(Artist artist) {
 		this.artist = artist;
 	}
+	
+	
 }
