@@ -8,43 +8,46 @@ package datastructures;
  * @author Juan José Valencia
  * @version 1.0 - November/2019 
  */
-public class Edge{
+public class Edge<Value>{
 	
-	private int u;
-	private int v;
+	private Vertex<Value> u;
+	private Vertex<Value> v;
 	private double weight;
 	
 	/**
-	 * 
-	 * @param u
-	 * @param v
-	 * @param weight
+	 * This method creates a non-directed edge between two vertices
+	 * @param u the vertex u
+	 * @param v the vertex v
+	 * @param weight the cost that it takes to go from u to v, and viceverse
 	 */
-	public Edge(int u, int v,double weight) {
+	public Edge(Vertex<Value> u, Vertex<Value> v,double weight) {
 		this.u = u;
 		this.v = v;
 		this.weight = weight;
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * This method returns the vertex u
+	 * <b>Pre:</b> the edge exists
+	 * @return the vertex u
 	 */
-	public int getU() {
+	public Vertex<Value> getU() {
 		return u;
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * This method returns the vertex v
+	 * <b>Pre:</b> the edge exists
+	 * @return the vertex v
 	 */
-	public int getV() {
+	public Vertex<Value> getV() {
 		return v;
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * This method returns the cost for this edge
+	 * <b>Pre:</b> the edge exists
+	 * @return cost
 	 */
 	public double getWeight() {
 		return weight;

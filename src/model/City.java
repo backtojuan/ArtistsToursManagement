@@ -10,80 +10,46 @@ package model;
  */
 public class City {
 
-	//atributte necesary to modeled the vertex inside the graph
-	private int id;
-	private String color;
-	public final static String WHITE = "W";
-	public final static String BLACK = "B";
-	public final static String GRAY = "G";
-	//self attributes
 	private Location continent;
 	private String country;
 	private String name;
-	private City pred;
-	private int key;
+	
 	/**
-	 * 
-	 * @param name
-	 * @param location
+	 * <b>City Constructor</b> 
+	 * @param continent the continent where this city is located
+	 * @param country the current contry which this city belongs to
+	 * @param name the name of the city
 	 */
-	public City(int id, Location continent,String country,String name, String color, City pred, int key) {
-		this.id = id;
+	public City(Location continent,String country,String name) {
 		this.continent = continent;
 		this.country = country;
 		this.name = name;
-		this.color = color;
-		this.pred = pred;
-		this.key = key;
 	}
 
 	/**
-	 * 
-	 * @return
-	 */
-	public int getId() {
-		return id;
-	}
-
-	/**
-	 * 
-	 * @return
+	 * This method returns the location of this city
+	 * <b>Pre:</b> The city exists
+	 * @return the location of this city
 	 */
 	public Location getContinent() {
 		return continent;
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * This method returns the country of this city
+	 * <b>Pre:</b> The city exists
+	 * @return the country of this city
 	 */
 	public String getCountry() {
 		return country;
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * This method returns the name of this city
+	 * <b>Pre:</b> The city exists
+	 * @return the name of this city
 	 */
 	public String getName() {
 		return name;
-	}
-	public String getColor() {
-		return color;
-	}
-	public void setKey(int k) {
-		key = k;
-	}
-	public void setPred(City p) {
-		pred = p;
-	}
-	public void setColor(String c) {
-		color = c;
-	}
-	public int getKey() {
-		return key;
-	}
-	public City getPred() {
-		return pred;
 	}
 }

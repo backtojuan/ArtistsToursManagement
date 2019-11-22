@@ -12,8 +12,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import model.City;
-import model.Location;
+import model.*;
+import datastructures.*;
 
 /**
  * This class manage the necessary attributes and methods to control the elements used inside the graphical user interface.
@@ -73,16 +73,11 @@ public class ArtistsTourManagementController {
 			String country = parts[1];
 			String name = parts[2];
 			
-			//City city = new City(id, Location.EUROPE, country, name);
+			Vertex<City> city = new Vertex<>(id,new City(Location.EUROPE, country, name));
 			
-			//citiesgraph.addVertex(city);
+			citiesgraph.addVertex(city);
 			line = br.readLine();
 		}
-		
-		citiesgraph.addEdge(1, 5, 500);
-		citiesgraph.addEdge(8, 12, 400);
-		
-		citiesgraph.printGraph();
 		
 		br.close(); 
     }

@@ -5,8 +5,7 @@ import java.time.LocalDate;
 import java.util.PriorityQueue;
 //import java.util.Queue;
 import java.util.LinkedList;
-
-import datastructures.AdjacencyListGraph;
+import datastructures.*;
 
 /**
  * This class manage the necessary attributes and methods to create planned tours
@@ -23,38 +22,82 @@ public class Tour {
 	private LocalDate finalDate;
 
 	private Artist artist;
-	private AdjacencyListGraph<City> graph;
+	private AdjacencyListGraph<Vertex<City>> map;
+	
+	/**
+	 * <b>Tour Constructor</b>
+	 * @param name the name of this tour
+	 * @param initDate the beggining date for the tour
+	 * @param finalDate the finishing date for the tour
+	 */
 	public Tour(String name, LocalDate initDate, LocalDate finalDate) {
 		this.name = name;
 		this.initDate = initDate;
 		this.finalDate = finalDate;
 	}
+	
+	/**
+	 * This method returns the name of this tour
+	 * <b>Pre:</b> the tour exists
+	 * @return the name of this tour
+	 */
 	public String getName() {
 		return name;
 	}
-
+	
+	/**
+	 * This method returns the initial date of this tour
+	 * <b>Pre:</b> the tour exists
+	 * @return the initial date for the tour
+	 */
 	public LocalDate getInitDate() {
 		return initDate;
 	}
 
+	/**
+	 * This method returns the final date of this tour
+	 * <b>Pre:</b> the tour exists
+	 * @return the final date for the tour
+	 */
 	public LocalDate getFinalDate() {
 		return finalDate;
 	}
-
+	
+	/**
+	 * This method returns the artist that is rehearsing for this tour
+	 * <b>Pre:</b> the tour exists
+	 * @return the artist for this tour
+	 */
 	public Artist getArtist() {
 		return artist;
 	}
-
+	
+	/**
+	 * This method gives to the tour the artist that will present the tour
+	 * <b>Pre:</b> the tour exists
+	 * <b>Pos:</b> the artist for this tour is definitive
+	 * @param artist the artist confirmed for the tour
+	 */
 	public void setArtist(Artist artist) {
 		this.artist = artist;
 	}
 	
+	/**
+	 * This method gives to the tour a map with the best selected route to cover their tour
+	 * <b>Pre:</b> the tour exists 
+	 * <b>Pos:</b> the route for this tour is definitive
+	 * @param map the seleced map with the route to cover this tour
+	 */
+	public void setMap(AdjacencyListGraph<Vertex<City>> map) {
+		this.map = map;
+	}
+	
 	//PRINCIPAL ALGORITHMS
 	
-	public void BFS(City city) {
+	/**public void BFS(City city) {
 		for(int i = 0; i<graph.getVertices().size(); i++) {
 			graph.getVertices().get(i).setColor("W");
-			//graph.getVertices().get(i).setKey(Double.POSITIVE_INFINITY);
+			graph.getVertices().get(i).setKey(Double.POSITIVE_INFINITY);
 			graph.getVertices().get(i).setPred(null);
 		}
 		city.setColor("G");
@@ -64,19 +107,19 @@ public class Tour {
 		queue.offer(city);
 		while(queue != null) {
 			//City u = queue.poll();
-			/*for(int i = 0; i<graph.getVertices().get(i).get) {
-				/*if(i.getColor() == WHITE) {
+			for(int i = 0; i<graph.getVertices().get(i).get) {
+				if(i.getColor() == WHITE) {
 					i.getColor() = GRAY;
 					i.getDistancia() = u.distancia+1;
 					i.getPrecesor() = u;
 					Q.offer(i);
 				}
 			}
-			u.getColor() = BLACK;*/
+			u.getColor() = BLACK;
 		}
-	}
+	}*/
 	
-	public void BFS(int s,int v) 
+	/**public void BFS(int s,int v) 
     { 
         // Mark all the vertices as not visited(By default 
         // set as false) 
@@ -98,7 +141,7 @@ public class Tour {
             // Get all adjacent vertices of the dequeued vertex s 
             // If a adjacent has not been visited, then mark it 
             // visited and enqueue it 
-            /**Iterator<Integer> i = adj[s].listIterator(); 
+            Iterator<Integer> i = adj[s].listIterator(); 
             while (i.hasNext()) 
             { 
                 int n = i.next(); 
@@ -107,29 +150,29 @@ public class Tour {
                     visited[n] = true; 
                     queue.add(n); 
                 } 
-            }*/
+            }
         } 
-    } 
+    }*/ 
 	
 	// A function used by DFS 
-    public void DFSUtil(int v,boolean visited[]) 
+    /**public void DFSUtil(int v,boolean visited[]) 
     { 
         // Mark the current node as visited and print it 
         visited[v] = true; 
         System.out.print(v+" "); 
   
         // Recur for all the vertices adjacent to this vertex 
-        /**Iterator<Integer> i = adj[v].listIterator(); 
+        Iterator<Integer> i = adj[v].listIterator(); 
         while (i.hasNext()) 
         { 
             int n = i.next(); 
             if (!visited[n]) 
                 DFSUtil(n, visited); 
-        }*/
-    } 
+        }
+    }*/
   
     // The function to do DFS traversal. It uses recursive DFSUtil() 
-    public void DFS(int v) 
+    /**public void DFS(int v) 
     { 
         // Mark all the vertices as not visited(set as 
         // false by default in java) 
@@ -137,13 +180,13 @@ public class Tour {
   
         // Call the recursive helper function to print DFS traversal 
         DFSUtil(v, visited); 
-    }
+    }*/
     
 	/**
 	 * 
 	 * @param r
 	 */
-	public void primAlgorithm(City r) {
+	/**public void primAlgorithm(City r) {
 		for(int i = 0; i<graph.getVertices().size(); i++) {
 			graph.getVertices().get(i).setKey((int)Long.MAX_VALUE);
 			graph.getVertices().get(i).setColor("W");
@@ -159,7 +202,7 @@ public class Tour {
 				
 			}
 		}
-	}
+	}*/
 	
 	/**
 	 * 
