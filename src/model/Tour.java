@@ -1,9 +1,11 @@
 package model;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.time.LocalDate;
-//import java.util.ArrayList;
 import java.util.PriorityQueue;
-//import java.util.Queue;
 import java.util.LinkedList;
 import datastructures.*;
 
@@ -17,6 +19,7 @@ import datastructures.*;
  */
 public class Tour {
 
+	private Location location;
 	private String name;
 	private String initDate;
 	private String finalDate;
@@ -24,16 +27,27 @@ public class Tour {
 	private Artist artist;
 	private AdjacencyListGraph<City> map;
 	
+	public final static String AFRICA_PATH = "data/africa.txt";
+	public final static String OCEANIA_PATH = "data/oceania.txt";
+	public final static String EUROPE_PATH = "data/europe.txt";
+	public final static String AMERICA_PATH = "data/america.txt";
+	public final static String ASIA_PATH = "data/asia.txt";
+	
+	private String path;
+	
 	/**
 	 * <b>Tour Constructor</b>
 	 * @param name the name of this tour
 	 * @param initDate the beggining date for the tour
 	 * @param finalDate the finishing date for the tour
+	 * @throws IOException 
 	 */
-	public Tour(String name, String initDate, String finalDate) {
+	public Tour(Location location,String name, String initDate, String finalDate, String path) throws IOException {
+		this.location = location;
 		this.name = name;
 		this.initDate = initDate;
 		this.finalDate = finalDate;
+		load(path);
 	}
 	
 	/**
@@ -92,6 +106,35 @@ public class Tour {
 		this.map = map;
 	}
 	
+	/**
+	 * This method loads the selected cities for this tour
+	 * <b>Pre:</b> the tour exists
+	 * <b>Pos:</b> the cities are loaded
+	 * @param path the path from where the cities are going to be load
+	 * @throws IOException in the case that the file that contains the cities cannot be loaded
+	 */
+	public void load(String path) throws IOException{
+		
+		BufferedReader br = new BufferedReader(new FileReader(new File(path)));
+		String line = br.readLine();
+		
+		map = new AdjacencyListGraph<>(15);
+		
+		while(line!=null) {
+			String[] cities = line.split(",");
+			
+			int key = Integer.parseInt(cities[0]);
+			String country = cities[1];
+			String name = cities[2];
+			
+			Vertex<City> vertex = new Vertex<City>(key,new City(location,country,name));
+			map.addVertex(vertex);
+			
+			line = br.readLine();
+		}		
+		br.close();
+	}
+	
 	@Override 
 	/**
 	 * This method gives the information for this object
@@ -100,176 +143,4 @@ public class Tour {
 	public String toString() {
 		return "Name: " + name + " InitialDate " + initDate + " FinalDate " + finalDate;
 	}
-	
-	//PRINCIPAL ALGORITHMS
-	
-	/**public void BFS(City city) {
-		for(int i = 0; i<graph.getVertices().size(); i++) {
-			graph.getVertices().get(i).setColor("W");
-			graph.getVertices().get(i).setKey(Double.POSITIVE_INFINITY);
-			graph.getVertices().get(i).setPred(null);
-		}
-		city.setColor("G");
-		city.setKey(0);
-		city.setPred(null);
-		LinkedList<City> queue = new LinkedList<City>();
-		queue.offer(city);
-		while(queue != null) {
-			//City u = queue.poll();
-			for(int i = 0; i<graph.getVertices().get(i).get) {
-				if(i.getColor() == WHITE) {
-					i.getColor() = GRAY;
-					i.getDistancia() = u.distancia+1;
-					i.getPrecesor() = u;
-					Q.offer(i);
-				}
-			}
-			u.getColor() = BLACK;
-		}
-	}*/
-	
-	/**public void BFS(int s,int v) 
-    { 
-        // Mark all the vertices as not visited(By default 
-        // set as false) 
-        boolean visited[] = new boolean[v]; 
-  
-        // Create a queue for BFS 
-        LinkedList<Integer> queue = new LinkedList<Integer>(); 
-  
-        // Mark the current node as visited and enqueue it 
-        visited[s]=true; 
-        queue.add(s); 
-  
-        while (queue.size() != 0) 
-        { 
-            // Dequeue a vertex from queue and print it 
-            s = queue.poll(); 
-            System.out.print(s+" "); 
-  
-            // Get all adjacent vertices of the dequeued vertex s 
-            // If a adjacent has not been visited, then mark it 
-            // visited and enqueue it 
-            Iterator<Integer> i = adj[s].listIterator(); 
-            while (i.hasNext()) 
-            { 
-                int n = i.next(); 
-                if (!visited[n]) 
-                { 
-                    visited[n] = true; 
-                    queue.add(n); 
-                } 
-            }
-        } 
-    }*/ 
-	
-	// A function used by DFS 
-    /**public void DFSUtil(int v,boolean visited[]) 
-    { 
-        // Mark the current node as visited and print it 
-        visited[v] = true; 
-        System.out.print(v+" "); 
-  
-        // Recur for all the vertices adjacent to this vertex 
-        Iterator<Integer> i = adj[v].listIterator(); 
-        while (i.hasNext()) 
-        { 
-            int n = i.next(); 
-            if (!visited[n]) 
-                DFSUtil(n, visited); 
-        }
-    }*/
-  
-    // The function to do DFS traversal. It uses recursive DFSUtil() 
-    /**public void DFS(int v) 
-    { 
-        // Mark all the vertices as not visited(set as 
-        // false by default in java) 
-        boolean visited[] = new boolean[v]; 
-  
-        // Call the recursive helper function to print DFS traversal 
-        DFSUtil(v, visited); 
-    }*/
-    
-	/**
-	 * 
-	 * @param r
-	 */
-	/**public void primAlgorithm(City r) {
-		for(int i = 0; i<graph.getVertices().size(); i++) {
-			graph.getVertices().get(i).setKey((int)Long.MAX_VALUE);
-			graph.getVertices().get(i).setColor("W");
-		}
-		r.setKey(0);
-		r.setPred(null);
-		PriorityQueue<City> Q = new PriorityQueue<>();
-		Q.offer(graph.getVertices().get(r.getId()));
-		City u;
-		while(Q.isEmpty() == false) {
-			u = (City) Q.poll();
-			for(int i = 0; i < graph.getVertices().size(); i++) {
-				
-			}
-		}
-	}*/
-	
-	/**
-	 * 
-	 * @param graph
-	 * @param V
-	 * @param src
-	 */
-    public void dijkstra(int graph[][],int V, int src) 
-    { 
-        int dist[] = new int[V];
-        Boolean sptSet[] = new Boolean[V]; 
-   
-        for (int i = 0; i < V; i++) { 
-            dist[i] = Integer.MAX_VALUE; 
-            sptSet[i] = false; 
-        } 
-   
-        dist[src] = 0; 
-   
-        for (int count = 0; count < V - 1; count++) {  
-            
-        	//int u = minDistance(dist, sptSet);  Method to calculate min distance still being implemented
-        	int u = 0;
-            sptSet[u] = true; 
- 
-            for (int v = 0; v < V; v++) { 
-                if (!sptSet[v] && graph[u][v] != 0 && dist[u] != Integer.MAX_VALUE && dist[u] + graph[u][v] < dist[v]) { 
-                    dist[v] = dist[u] + graph[u][v]; 
-                }
-        	}
-        } 
-    }
-	
-	
-	/**
-	 * 
-	 * @param graph
-	 * @param V
-	 */
-	public void floydWarshall(int graph[][], int V) { 
-		 	int dist[][] = new int[V][V]; 
-	        int i, j, k; 
-	  
-	        for (i = 0; i < V; i++) { 
-	        	for (j = 0; j < V; j++) { 
-	                dist[i][j] = graph[i][j];
-	        	}
-	        }
-	        for (k = 0; k < V; k++) 
-	        {  
-	            for (i = 0; i < V; i++) 
-	            {       
-	                for (j = 0; j < V; j++) 
-	                {  
-	                    if (dist[i][k] + dist[k][j] < dist[i][j]) 
-	                        dist[i][j] = dist[i][k] + dist[k][j]; 
-	                } 
-	            } 
-	        }
-	 }
 }

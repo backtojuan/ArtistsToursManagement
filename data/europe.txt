@@ -13,8 +13,3 @@
 13,Irlanda,Dublin
 14,Noruega,Oslo
 15,Polonia,Varsovia
-16,Suecia,Estocolmo
-17,Hungria,Budapest
-18,Suiza,Berna
-19,Eslovaquia,Bratislava
-20,Finlandia,Helsinki

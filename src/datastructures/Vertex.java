@@ -2,6 +2,10 @@ package datastructures;
 
 public class Vertex<Value> {
 	
+	//Attributes for BFS
+	private int distance;
+	
+	//Attributtes for DFS
 	private int initialtime;
 	private int finishtime;
 	
@@ -27,6 +31,15 @@ public class Vertex<Value> {
 		this.value = value;
 		this.color = Vertex.WHITE;
 		this.pred = null;
+	}
+	
+	/**
+	 * This method returns the distance until this vertex
+	 * <b>Pre:</b> the graph exists
+	 * @return the distance until this vertex
+	 */
+	public int getDistance() {
+		return distance;
 	}
 
 	/**
@@ -87,6 +100,26 @@ public class Vertex<Value> {
 	 */
 	public int getFinishtime() {
 		return finishtime;
+	}
+	
+	/**
+	 * This method sets the distance for this vertex when necessary
+	 * <b>Pre:</b> the graph exists
+	 * <b>Pos:</b> the distance of this vertex has changed
+	 * @param distance the new distance for this vertex
+	 */
+	public void setDistance(int distance) {
+		this.distance = distance;
+	}
+	
+	/**
+	 * This method sets the key for this vertex when necessary
+	 * <b>Pre:</b> the graph exists
+	 * <b>Pos:</b> the key of this vertex has changed
+	 * @param key the new key value for this vertex
+	 */
+	public void setKey(int key) {
+		this.key = key;
 	}
 	
 	/**

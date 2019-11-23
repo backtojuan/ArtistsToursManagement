@@ -1,0 +1,15 @@
+1,Egipto,El-cairo
+2,Sudafrica,Johannesburgo
+3,Angola,Luanda
+4,Sudan,Jartun
+5,Kenia,Nairobi
+6,Costa-de-marfil,Abiyan
+7,Gahna,Acra
+8,Argelia,Argel
+9,Senegal,Dakar
+10,Uganda,Kampal
+11,Nigeri,Abuja
+12,Tunéz,Tunéz
+13,Zimbabue,Harare
+14,Guine,Conakri
+15,Mozambique,Maputo

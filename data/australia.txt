@@ -1,0 +1,15 @@
+1,Australia,Sydney
+2,Australia,Melbourne
+3,Australia,Perth
+4,Australia,Brisbane
+5,Australia,Auckland
+6,Australia,Wellington
+7,Australia,Canberra
+8,Australia,New-castle
+9,Australia,Suva
+10,Australia,Adelaida
+11,Australia,Papeete
+12,Australia,Apia
+13,Australia,Palikir
+14,Australia,Honiara
+15,Australia,Nadi

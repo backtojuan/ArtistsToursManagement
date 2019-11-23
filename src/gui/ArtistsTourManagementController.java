@@ -1,9 +1,7 @@
 package gui;
 
 import javafx.fxml.FXML;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -12,13 +10,14 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.DialogPane;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import model.*;
 import datastructures.*;
@@ -52,28 +51,27 @@ public class ArtistsTourManagementController {
     private DatePicker finaldate;
 
     @FXML
-    private TextField artistprofile;
+    private Label tour;
+
+    @FXML
+    private Label artist;
+
+    @FXML
+    private Label label;
     
     @FXML
-    private ImageView currentartist;
-    
-    @FXML
-    private ImageView label;
+    private Button tourbutton;
     
     @FXML
     private void initialize() {
     	continent.setItems(FXCollections.observableArrayList(Location.AFRICA,Location.AMERICA,Location.ASIA,Location.OCEANIA,Location.EUROPE));
-    	currentartist.setFitHeight(250);
-    	currentartist.setFitWidth(250);
-    	label.setFitHeight(250);
-    	label.setFitWidth(250);
     }
     
     @FXML
     private void generateTour(ActionEvent event){
     	
     	Alert error = new Alert(AlertType.ERROR,"Invalid information, check again",ButtonType.CLOSE);
-    	Alert warning = new Alert(AlertType.WARNING,"Missing information, check again",ButtonType.CLOSE);
+    	Alert warning = new Alert(AlertType.WARNING,"Missing information or files, check again",ButtonType.CLOSE);
     	
     	try {
     		String name = artistname.getText();
@@ -93,11 +91,13 @@ public class ArtistsTourManagementController {
 	    		String initdate = initialdate.getValue().toString();
 	    		String finishdate = finaldate.getValue().toString(); 
 	    		
-	    		Artist artist = new Artist(name, labelname);
-	    		Tour tour = new Tour(tourName,initdate,finishdate);
+	    		this.tour.setText(this.tour.getText() + " " + tourName);
+	    		this.label.setText(this.label.getText() + " " + labelname);
+	    		this.artist.setText(this.artist.getText() + " " + name);
+	    		tourbutton.setDisable(true);
 	    		
-	    		currentartist.setImage(new Image(profile));
-	    		label.setImage(new Image(labelname));
+	    		Artist artist = new Artist(name, labelname);
+	    		Tour tour = new Tour(continent.getValue(),tourName,initdate,finishdate,getPath());
 	    	}
     	}
     	catch(NullPointerException npe) {
@@ -107,5 +107,37 @@ public class ArtistsTourManagementController {
     		dialogpane.getStylesheets().add("gui/css/theme.css");
     		error.show();
     	}
+    	catch(IOException ioe) {
+    		warning.show();
+    		Stage stage = (Stage) warning.getDialogPane().getScene().getWindow();
+    		stage.getIcons().add(new Image("gui/imgs/icon.png"));
+    		DialogPane dialogpane = warning.getDialogPane();
+    		dialogpane.getStylesheets().add("gui/css/theme.css");
+    	}
+    }
+    
+    @FXML
+    /**
+     * This method sets the current path from where the cities are going to be loaded
+     * @return a path to load the selected cities for this tour
+     */
+    private String getPath() {
+    	String path;
+    	if(continent.getValue().equals(Location.AFRICA)){
+    		path = Tour.AFRICA_PATH;
+    	}
+    	else if(continent.getValue().equals(Location.AMERICA)) {
+    		path = Tour.AMERICA_PATH;
+    	}
+    	else if(continent.getValue().equals(Location.ASIA)) {
+    		path = Tour.ASIA_PATH;
+    	}
+    	else if(continent.getValue().equals(Location.EUROPE)) {
+    		path = Tour.EUROPE_PATH;
+    	}
+    	else {
+    		path = Tour.OCEANIA_PATH;
+    	}
+    	return path;
     }
 }
