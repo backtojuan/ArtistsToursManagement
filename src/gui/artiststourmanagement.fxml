@@ -17,23 +17,13 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="960.0" stylesheets="@css/theme.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ArtistsTourManagementController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="960.0" styleClass="borderpane" stylesheets="@css/theme.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ArtistsTourManagementController">
    <top>
       <Pane prefHeight="88.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="876.0" fitWidth="1290.0" layoutX="-316.0" layoutY="-285.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@imgs/background.jpg" />
-               </image>
-            </ImageView>
             <ImageView fitHeight="43.0" fitWidth="69.0" layoutX="38.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@imgs/halsey.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="12.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@imgs/avrilavigne.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="21.0" fitWidth="177.0" layoutX="134.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
@@ -46,7 +36,7 @@
                   <Image url="@imgs/arianagrande.png" />
                </image>
             </ImageView>
-            <Label layoutX="312.0" layoutY="28.0" text="ARTISTS TOUR MANAGEMENT">
+            <Label layoutX="312.0" layoutY="28.0" styleClass="title" stylesheets="@css/theme.css" text="ARTISTS TOUR MANAGEMENT">
                <font>
                   <Font name="Ebrima" size="30.0" />
                </font>
@@ -76,7 +66,7 @@
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <GridPane BorderPane.alignment="CENTER">
+                        <GridPane styleClass="gridpane" stylesheets="@css/theme.css" BorderPane.alignment="CENTER">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -88,27 +78,27 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <ComboBox fx:id="continent" prefWidth="150.0" promptText="Select Continent..." styleClass="combobox" stylesheets="@css/theme.css" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                              <ComboBox fx:id="continent" prefHeight="25.0" prefWidth="193.0" promptText="Select Continent..." styleClass="combobox" stylesheets="@css/theme.css" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                  <GridPane.margin>
-                                    <Insets bottom="55.0" left="50.0" />
+                                    <Insets bottom="55.0" left="65.0" />
                                  </GridPane.margin>
                               </ComboBox>
-                              <TextField fx:id="artistname" GridPane.rowIndex="2">
+                              <TextField fx:id="artistname" styleClass="textfield" stylesheets="@css/theme.css" GridPane.rowIndex="2">
                                  <GridPane.margin>
-                                    <Insets bottom="55.0" left="190.0" right="20.0" />
+                                    <Insets bottom="75.0" left="190.0" right="20.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <ImageView fx:id="currentartist" fitHeight="200.0" fitWidth="215.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                              <ImageView fx:id="currentartist" fitHeight="178.0" fitWidth="177.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                                  <image>
                                     <Image url="@imgs/silhoutte.png" />
                                  </image>
                                  <GridPane.margin>
-                                    <Insets bottom="115.0" left="175.0" />
+                                    <Insets bottom="115.0" left="215.0" />
                                  </GridPane.margin>
                               </ImageView>
                               <Label text="Artist's Name : " GridPane.rowIndex="2">
                                  <GridPane.margin>
-                                    <Insets bottom="55.0" left="25.0" />
+                                    <Insets bottom="75.0" left="25.0" />
                                  </GridPane.margin>
                                  <font>
                                     <Font name="Lato Regular" size="20.0" />
@@ -129,12 +119,12 @@
                               </TextField>
                               <TextField fx:id="tourname" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <GridPane.margin>
-                                    <Insets bottom="55.0" left="150.0" right="40.0" />
+                                    <Insets bottom="75.0" left="150.0" right="10.0" />
                                  </GridPane.margin>
                               </TextField>
                               <Label text="Tour Name :" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <GridPane.margin>
-                                    <Insets bottom="55.0" left="25.0" right="25.0" />
+                                    <Insets bottom="75.0" left="25.0" right="25.0" />
                                  </GridPane.margin>
                                  <font>
                                     <Font name="Lato Regular" size="20.0" />
@@ -145,7 +135,7 @@
                                     <Font size="20.0" />
                                  </font>
                                  <GridPane.margin>
-                                    <Insets left="25.0" />
+                                    <Insets bottom="10.0" left="25.0" />
                                  </GridPane.margin>
                               </Label>
                               <Label text="Final Date:" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -158,17 +148,17 @@
                               </Label>
                               <DatePicker fx:id="initialdate" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <GridPane.margin>
-                                    <Insets left="150.0" right="40.0" />
+                                    <Insets bottom="10.0" left="170.0" right="30.0" />
                                  </GridPane.margin>
                               </DatePicker>
                               <DatePicker fx:id="finaldate" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <GridPane.margin>
-                                    <Insets left="150.0" right="40.0" top="55.0" />
+                                    <Insets left="170.0" right="30.0" top="55.0" />
                                  </GridPane.margin>
                               </DatePicker>
                               <Label text="Artist's Profile :" GridPane.rowIndex="2">
                                  <GridPane.margin>
-                                    <Insets left="25.0" />
+                                    <Insets bottom="10.0" left="25.0" />
                                  </GridPane.margin>
                                  <font>
                                     <Font size="20.0" />
@@ -176,7 +166,7 @@
                               </Label>
                               <TextField fx:id="artistprofile" GridPane.rowIndex="2">
                                  <GridPane.margin>
-                                    <Insets left="190.0" right="20.0" />
+                                    <Insets bottom="10.0" left="190.0" right="20.0" />
                                  </GridPane.margin>
                               </TextField>
                               <ImageView fx:id="label" fitHeight="204.0" fitWidth="164.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -184,12 +174,12 @@
                                     <Image url="@imgs/label.png" />
                                  </image>
                                  <GridPane.margin>
-                                    <Insets bottom="115.0" left="200.0" />
+                                    <Insets bottom="115.0" left="250.0" />
                                  </GridPane.margin>
                               </ImageView>
                               <Button mnemonicParsing="false" onAction="#generateTour" text="GENERATE TOUR" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                  <GridPane.margin>
-                                    <Insets left="50.0" top="30.0" />
+                                    <Insets left="105.0" top="30.0" />
                                  </GridPane.margin>
                               </Button>
                            </children>

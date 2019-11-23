@@ -18,8 +18,8 @@ import datastructures.*;
 public class Tour {
 
 	private String name;
-	private LocalDate initDate;
-	private LocalDate finalDate;
+	private String initDate;
+	private String finalDate;
 
 	private Artist artist;
 	private AdjacencyListGraph<City> map;
@@ -30,7 +30,7 @@ public class Tour {
 	 * @param initDate the beggining date for the tour
 	 * @param finalDate the finishing date for the tour
 	 */
-	public Tour(String name, LocalDate initDate, LocalDate finalDate) {
+	public Tour(String name, String initDate, String finalDate) {
 		this.name = name;
 		this.initDate = initDate;
 		this.finalDate = finalDate;
@@ -50,7 +50,7 @@ public class Tour {
 	 * <b>Pre:</b> the tour exists
 	 * @return the initial date for the tour
 	 */
-	public LocalDate getInitDate() {
+	public String getInitDate() {
 		return initDate;
 	}
 
@@ -59,7 +59,7 @@ public class Tour {
 	 * <b>Pre:</b> the tour exists
 	 * @return the final date for the tour
 	 */
-	public LocalDate getFinalDate() {
+	public String getFinalDate() {
 		return finalDate;
 	}
 	
@@ -98,7 +98,7 @@ public class Tour {
 	 * @return a String with the information 
 	 */
 	public String toString() {
-		return "Name: " + name + " InitialDate " + initDate.toString() + " FinalDate " + finalDate.toString();
+		return "Name: " + name + " InitialDate " + initDate + " FinalDate " + finalDate;
 	}
 	
 	//PRINCIPAL ALGORITHMS

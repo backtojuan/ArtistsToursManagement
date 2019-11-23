@@ -5,13 +5,21 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDate;
+
 import datastructures.AdjacencyListGraph;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import model.*;
 import datastructures.*;
 
@@ -53,32 +61,51 @@ public class ArtistsTourManagementController {
     private ImageView label;
     
     @FXML
-    public void initialize() {
+    private void initialize() {
     	continent.setItems(FXCollections.observableArrayList(Location.AFRICA,Location.AMERICA,Location.ASIA,Location.OCEANIA,Location.EUROPE));
+    	currentartist.setFitHeight(250);
+    	currentartist.setFitWidth(250);
+    	label.setFitHeight(250);
+    	label.setFitWidth(250);
     }
     
     @FXML
-    void generateTour(ActionEvent event) throws IOException {
-    	AdjacencyListGraph<City> citiesgraph = new AdjacencyListGraph<>(20);
-		
-		BufferedReader br = new BufferedReader(new FileReader(new File("data/europe.txt")));
-		
-		String line = br.readLine();
-		
-		while(br.readLine()!=null) {
-			
-			String[] parts = line.split(",");
-			
-			int id = Integer.parseInt(parts[0]);
-			String country = parts[1];
-			String name = parts[2];
-			
-			Vertex<City> city = new Vertex<>(id,new City(Location.EUROPE, country, name));
-			
-			citiesgraph.addVertex(city);
-			line = br.readLine();
-		}
-		
-		br.close(); 
+    private void generateTour(ActionEvent event){
+    	
+    	Alert error = new Alert(AlertType.ERROR,"Invalid information, check again",ButtonType.CLOSE);
+    	Alert warning = new Alert(AlertType.WARNING,"Missing information, check again",ButtonType.CLOSE);
+    	
+    	try {
+    		String name = artistname.getText();
+    		String labelname = artistlabel.getText();
+    		String profile = artistlabel.getText();
+    		String tourName = tourname.getText();
+    		
+	    	if(name.isEmpty() || labelname.isEmpty() || profile.isEmpty() || tourName.isEmpty()) {
+	    		warning.show();
+	    		Stage stage = (Stage) warning.getDialogPane().getScene().getWindow();
+	    		stage.getIcons().add(new Image("gui/imgs/icon.png"));
+	    		DialogPane dialogpane = warning.getDialogPane();
+	    		dialogpane.getStylesheets().add("gui/css/theme.css");
+	    	}
+	    	else 
+	    	{
+	    		String initdate = initialdate.getValue().toString();
+	    		String finishdate = finaldate.getValue().toString(); 
+	    		
+	    		Artist artist = new Artist(name, labelname);
+	    		Tour tour = new Tour(tourName,initdate,finishdate);
+	    		
+	    		currentartist.setImage(new Image(profile));
+	    		label.setImage(new Image(labelname));
+	    	}
+    	}
+    	catch(NullPointerException npe) {
+    		Stage stage = (Stage) error.getDialogPane().getScene().getWindow();
+    		stage.getIcons().add(new Image("gui/imgs/icon.png"));
+    		DialogPane dialogpane = error.getDialogPane();
+    		dialogpane.getStylesheets().add("gui/css/theme.css");
+    		error.show();
+    	}
     }
 }
