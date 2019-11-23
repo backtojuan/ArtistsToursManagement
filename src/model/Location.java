@@ -8,5 +8,5 @@ package model;
  * @version 1.0 - November/2019 
  */
 public enum Location {
-	AMERICA,EUROPE,ASIA,AFRICA,AUSTRALIA
+	AMERICA,EUROPE,ASIA,AFRICA,OCEANIA
 }

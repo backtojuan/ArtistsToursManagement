@@ -54,7 +54,7 @@ public class ArtistsTourManagementController {
     
     @FXML
     public void initialize() {
-    	continent.setItems(FXCollections.observableArrayList(Location.AFRICA,Location.AMERICA,Location.ASIA,Location.AUSTRALIA,Location.EUROPE));
+    	continent.setItems(FXCollections.observableArrayList(Location.AFRICA,Location.AMERICA,Location.ASIA,Location.OCEANIA,Location.EUROPE));
     }
     
     @FXML

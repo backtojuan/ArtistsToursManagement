@@ -22,10 +22,11 @@ public class AdjacencyListGraph<Value> implements GraphInterface<Value> {
 	@SuppressWarnings("unchecked")
 	/**
 	 * <b>Graph Constructor</b>
+	 * Constructor method for a non-directed weighted graph
 	 * @param totalvertices the totalvertices to be added in the current graph
 	 */
 	public AdjacencyListGraph(int totalvertices) {
-		totalvertices = 0;
+		this.totalvertices = totalvertices;
 		vertices = new ArrayList<>();
 		adjacencylist = new LinkedList[totalvertices];
 		for (int i = 0; i < adjacencylist.length; i++) {
@@ -49,6 +50,15 @@ public class AdjacencyListGraph<Value> implements GraphInterface<Value> {
  	*/
 	public ArrayList<Vertex<Value>> getVertices() {
 		return vertices;
+	}
+	
+	/**
+	 * This method returns the adjacent vertices from each vertex inside this graph
+	 *<b>Pre:</b> the graph exists 
+	 * @return the adjacencylist of this graph
+	 */
+	public LinkedList<Edge<Value>>[] getAdjacencyList(){
+		return adjacencylist;
 	}
 	
 	@Override
@@ -87,8 +97,8 @@ public class AdjacencyListGraph<Value> implements GraphInterface<Value> {
 	 */
 	public void addEdge(Vertex<Value> u, Vertex<Value> v, double weight) {
 		Edge<Value> edge = new Edge<>(u, v, weight);
-		adjacencylist[u.getKey()].add(edge);
-		adjacencylist[v.getKey()].add(edge);
+		adjacencylist[u.getKey()-1].add(edge);
+		adjacencylist[v.getKey()-1].add(edge);
 	}
 		
 	@Override

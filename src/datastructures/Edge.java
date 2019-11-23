@@ -52,4 +52,13 @@ public class Edge<Value>{
 	public double getWeight() {
 		return weight;
 	}
+	
+	@Override
+	/**
+	 * This method gives the information for this object
+	 * @return a String with the information 
+	 */
+	public String toString() {
+		return u.toString() + " Connected to " + v.toString() + " With " + weight;
+	}
 }

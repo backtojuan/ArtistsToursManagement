@@ -52,4 +52,13 @@ public class City {
 	public String getName() {
 		return name;
 	}
+	
+	@Override
+	/**
+	 * This method gives the information for this object
+	 * @return a String with the information 
+	 */
+	public String toString() {
+		return "Continent: " + continent + " Country: " + country + " Name: " + name;
+	}
 }

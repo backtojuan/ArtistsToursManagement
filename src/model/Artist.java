@@ -40,4 +40,13 @@ public class Artist {
 	public String getLabel() {
 		return label;
 	}
+	
+	@Override
+	/**
+	 * This method gives the information for this object
+	 * @return a String with the information 
+	 */
+	public String toString() {
+		return "Name: " + name + " Label: " + label;
+	}
 }

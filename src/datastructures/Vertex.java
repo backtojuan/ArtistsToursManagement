@@ -128,4 +128,13 @@ public class Vertex<Value> {
 	public void setFinishtime(int finishtime) {
 		this.finishtime = finishtime;
 	}	
+	
+	@Override
+	/**
+	 * This method gives information for this object
+	 * @return a String with information
+	 */
+	public String toString() {
+		return value.toString();
+	}
 }

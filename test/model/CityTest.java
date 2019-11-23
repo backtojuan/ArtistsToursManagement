@@ -15,10 +15,15 @@ import org.junit.jupiter.api.Test;
 public class CityTest {
 
 	private void setUpScenary1() {
-			
+			//Empty
 	}
 	
 	@Test
+	/**
+	 * This method test the exists method of the model class "City" making sure that a City can be created
+	 * with correct attributes
+	 * <b>Pos:</b> The city was created correctly, is not null and it has the expected values.
+	 */
 	private void testCity() {
 		
 	}

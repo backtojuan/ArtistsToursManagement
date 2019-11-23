@@ -15,11 +15,16 @@ import org.junit.jupiter.api.Test;
 public class TourTest {
 
 	private void setUpScenary1() {
-		
+		//Empty
 	}
 	
 	@Test
-	private void test() {
+	/**
+	 * This method test the exists method of the model class "Tour" making sure that a Tour can be created
+	 * with correct attributes
+	 * <b>Pos:</b> The tour was created correctly, is not null and it has the expected values.
+	 */
+	private void testTour() {
 		
 	}
 

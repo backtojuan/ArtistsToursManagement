@@ -22,7 +22,7 @@ public class Tour {
 	private LocalDate finalDate;
 
 	private Artist artist;
-	private AdjacencyListGraph<Vertex<City>> map;
+	private AdjacencyListGraph<City> map;
 	
 	/**
 	 * <b>Tour Constructor</b>
@@ -88,8 +88,17 @@ public class Tour {
 	 * <b>Pos:</b> the route for this tour is definitive
 	 * @param map the seleced map with the route to cover this tour
 	 */
-	public void setMap(AdjacencyListGraph<Vertex<City>> map) {
+	public void setMap(AdjacencyListGraph<City> map) {
 		this.map = map;
+	}
+	
+	@Override 
+	/**
+	 * This method gives the information for this object
+	 * @return a String with the information 
+	 */
+	public String toString() {
+		return "Name: " + name + " InitialDate " + initDate.toString() + " FinalDate " + finalDate.toString();
 	}
 	
 	//PRINCIPAL ALGORITHMS

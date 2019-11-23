@@ -15,10 +15,15 @@ import org.junit.jupiter.api.Test;
 public class ArtistTest {
 
 	private void setUpScenary1() {
-		
+		//Empty
 	}
 	
 	@Test
+	/**
+	 * This method test the exists method of the model class "Artist" making sure that an Artist can be created
+	 * with correct attributes
+	 * <b>Pos:</b> The artist was created correctly, is not null and it has the expected values.
+	 */
 	private void testArtist() {
 		
 	}
