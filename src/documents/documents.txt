@@ -1,3 +1,9 @@
 Class Diagram
 
+//class diagram//
+
 https://drive.google.com/file/d/1OsW8mQHPmHOjboabA3Nrwg8vwnQYgsze/view?usp=sharing
+
+//documentation and test desing//
+
+https://docs.google.com/document/d/1oDZZUICkky0y5RPAaZbLyUgU9f3azuQifkgbMxnTvGw
