@@ -37,7 +37,7 @@ public class VertexTest {
 	 */
 	public void testVertex() {
 		setUpScenary1();
-		City city = new City(Location.EUROPE,"Alemania", "Berlin");
+		city = new City(Location.EUROPE,"Alemania", "Berlin");
 		vertex = new Vertex<City>(1, city);
 		
 		assertNotNull(vertex, "The vertex is null as not expected");
