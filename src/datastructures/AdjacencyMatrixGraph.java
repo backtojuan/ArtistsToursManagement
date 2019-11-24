@@ -55,6 +55,22 @@ public class AdjacencyMatrixGraph<Value> implements GraphInterface<Value>{
 	}
 	
 	/**
+	 * This method returns the all edges that has been added to the graph
+	 * <b>Pre:</b> the graph exists 
+	 * @return a List with all the edges
+	 */
+	public List<Edge<Value>> getEdges(){
+		ArrayList<Edge<Value>> edges =new ArrayList<>();
+		for (int i = 0; i < weightsmatrix.size(); i++) {
+			for (int j = 0; j < weightsmatrix.get(i).size(); j++) {
+				Edge<Value> edge = new Edge<Value>(vertices.get(i),vertices.get(j),weightsmatrix.get(i).get(j));
+				edges.add(edge);
+			}
+		}		
+		return edges;
+	}
+	
+	/**
 	 * This method returns the adjacent vertices from each vertex inside this graph
 	 *<b>Pre:</b> the graph exists 
 	 * @return the adjacencymatrix of this graph
@@ -68,7 +84,7 @@ public class AdjacencyMatrixGraph<Value> implements GraphInterface<Value>{
 	 *<b>Pre:</b> the graph exists 
 	 * @return the weightsmatrix of this graph
 	 */
-	public double[][] getWeightsdMatrix(){
+	public double[][] getWeightsMatrix(){
 		double[][] weights = new double[vertices.size()][vertices.size()];
 		for (int i = 0; i < weights.length; i++) {
 			for (int j = 0; j < weights.length; j++) {
@@ -92,7 +108,12 @@ public class AdjacencyMatrixGraph<Value> implements GraphInterface<Value>{
 		ArrayList<Double> weight = new ArrayList<>();
 		for (int i = 0; i < totalvertices; i++) {
 			adjacent.add(0);
-			weight.add(Double.MAX_VALUE);
+			if(vertex.getKey()-1 == i) {
+				weight.add(0.0);
+			}
+			else {
+				weight.add(Double.MAX_VALUE);
+			}
 		}
 		adjacencymatrix.add(vertex.getKey()-1, adjacent);
 		weightsmatrix.add(vertex.getKey()-1, weight);
@@ -148,7 +169,7 @@ public class AdjacencyMatrixGraph<Value> implements GraphInterface<Value>{
 	@SuppressWarnings("unchecked")
 	public Vertex<Value>[] BFS(Vertex<Value> source) {
 		
-		Vertex<Value>[] distances = new Vertex[totalvertices];
+		Vertex<Value>[] reachable = new Vertex[totalvertices];
 		int key = source.getKey();
 		
 		for(Vertex<Value> vertex : vertices) {
@@ -169,14 +190,14 @@ public class AdjacencyMatrixGraph<Value> implements GraphInterface<Value>{
 				if(v.getColor().equals(Vertex.WHITE)) {
 					v.setColor(Vertex.GRAY);
 					v.setDistance(u.getDistance()+1);
-					distances[i] = v;
 					v.setPred(u);
+					reachable[i] = v;
 					queue.offer(v);
 				}
 				u.setColor(Vertex.BLACK);
 			}
 		}
-		return distances;
+		return reachable;
 	}
 	
 	/**
@@ -268,12 +289,33 @@ public class AdjacencyMatrixGraph<Value> implements GraphInterface<Value>{
 	 * This method generates a Minimum Spanning Tree (MST) using Kruskal Algorithm
 	 * <b>Pre:</b> The graph exists
 	 * <b>Pre:</b> The given source vertex is in the graph
-	 * <b>Pos:</b> The distances from a given source vertex to the rest (including all vertices) are minimum
-	 * @param 
-	 * @return an array of vertices with the minimum cost to cover all vertices in this graph
+	 * <b>Pos:</b> The distances from a given source vertex to the rest (including all vertices) are minimum 
+	 * @return a list with all the less distances to cover all vertices in the graph
 	 */
-	public void kruskal() {
+	public ArrayList<Double> kruskal() {
+		ArrayList<Double> keys = new ArrayList<>();
+		ArrayList<Edge<Value>> edges = (ArrayList<Edge<Value>>) getEdges();
+		//EDGES NEED TO BE SORT
 		
+		UnionFind disjointset = new UnionFind(totalvertices);
+		
+		int edgesize = 0;
+		int i = 0;
+		
+		while(edgesize < vertices.size() && i < edges.size()) {
+			Edge<Value> edge = edges.get(i);
+			i++;
+			
+			int a = disjointset.find(edge.getU().getKey()-1);
+			int b = disjointset.find(edge.getV().getKey()-1);
+			
+			if(a != b) {
+				keys.add(edge.getWeight());
+				edgesize++;
+				disjointset.union(a, b);
+			}
+		}
+		return keys;
 	}
 	
 	/**
@@ -286,16 +328,18 @@ public class AdjacencyMatrixGraph<Value> implements GraphInterface<Value>{
 	 * 
 	 */
 	@SuppressWarnings("unchecked")
-	public void dijkstra(Vertex<Value> source){ 
+	public ArrayList<Edge<Value>> dijkstra(Vertex<Value> source){ 
 		
-		double[] keys = new double[totalvertices];
+		ArrayList<Edge<Value>> minimum = new ArrayList<>();
+		
+		double[] distances = new double[totalvertices];
 		Vertex<Value>[] pred = new Vertex[totalvertices];
 		PriorityQueue<Vertex<Value>> queue = new PriorityQueue<>();
 		
 		for (int i = 0; i < totalvertices; i++) {
 			Vertex<Value> vertex = vertices.get(i);
 			if(!vertex.equals(source)) {
-				keys[vertex.getKey()-1] = Double.MAX_VALUE;
+				distances[vertex.getKey()-1] = Double.MAX_VALUE;
 				pred[vertex.getKey()-1].setPred(null);
 				queue.offer(vertex);
 			}
@@ -306,15 +350,17 @@ public class AdjacencyMatrixGraph<Value> implements GraphInterface<Value>{
 			ArrayList<Vertex<Value>> adjacent = (ArrayList<Vertex<Value>>) vertexAdjacent(u);
 			for (int i = 0; i < adjacent.size(); i++) {
 				Vertex<Value> v = adjacent.get(i);
-				double alt = keys[u.getKey()-1] + weightsmatrix.get(u.getKey()-1).get(v.getKey()-1);
-				if(alt<keys[v.getKey()-1]) {
+				double alt = distances[u.getKey()-1] + weightsmatrix.get(u.getKey()-1).get(v.getKey()-1);
+				if(alt<distances[v.getKey()-1]) {
 					queue.remove(v);
-					keys[v.getKey()-1] = alt;
+					minimum.add(new Edge<Value>(u,v,alt));
+					distances[v.getKey()-1] = alt;
 					pred[v.getKey()-1] = u;
 					queue.add(v);
 				}
 			}
 		}
+		return minimum;
 	}
 
 	/**
@@ -326,8 +372,8 @@ public class AdjacencyMatrixGraph<Value> implements GraphInterface<Value>{
 	 * @return an array with all the vertices ordered 
 	 * 
 	 */
-	public void floydWarshall(Vertex<Value> source) { 
-		double[][] weights = getWeightsdMatrix();
+	public double[][] floydWarshall(Vertex<Value> source) { 
+		double[][] weights = getWeightsMatrix();
 		for (int k = 0; k < weights.length; k++) {
 			for (int i = 0; i < weights.length; i++) {
 				for (int j = 0; j < weights.length; j++) {
@@ -337,6 +383,6 @@ public class AdjacencyMatrixGraph<Value> implements GraphInterface<Value>{
 				}
 			}
 		}
+		return weights;
 	}
-	
 }

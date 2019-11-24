@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * This class manage the necessary attributes and methods to create the graph representation using an AdjacencyList
@@ -54,6 +55,21 @@ public class AdjacencyListGraph<Value> implements GraphInterface<Value> {
 	}
 
 	/**
+	 * This method returns the all edges that has been added to the graph
+	 * <b>Pre:</b> the graph exists 
+	 * @return a List with all the edges
+	 */
+	public List<Edge<Value>> getEdges(){
+		ArrayList<Edge<Value>> edges =new ArrayList<>();
+		for (int i = 0; i < totalvertices; i++) {
+			for (int j = 0; j < adjacencylist[i].size(); j++) {
+				edges.add(adjacencylist[i].get(j));
+			}
+		}
+		return edges;
+	}
+
+	/**
 	 * This method returns the adjacent vertices from each vertex inside this graph
 	 *<b>Pre:</b> the graph exists 
 	 * @return the adjacencylist of this graph
@@ -61,7 +77,7 @@ public class AdjacencyListGraph<Value> implements GraphInterface<Value> {
 	public LinkedList<Edge<Value>>[] getAdjacencyList(){
 		return adjacencylist;
 	}
-	
+
 	/**
 	 * This method returns the weights from each vertex to the rest inside this graph
 	 *<b>Pre:</b> the graph exists 
@@ -74,7 +90,7 @@ public class AdjacencyListGraph<Value> implements GraphInterface<Value> {
 				weights[i][j] = Double.MAX_VALUE;
 			}
 		}
-		for (int i = 0; i < totalvertices; i++) {
+		for (int i = 0; i < vertices.size(); i++) {
 			weights[i][i] = 0;
 			Vertex<Value> u = vertices.get(i);
 			LinkedList<Edge<Value>> adjacent = adjacencylist[u.getKey()-1];
@@ -83,6 +99,7 @@ public class AdjacencyListGraph<Value> implements GraphInterface<Value> {
 				Vertex<Value> v = e.getV();
 				double weight = e.getWeight();
 				weights[i][v.getKey()-1] = weight;
+				weights[v.getKey()-1][i] = weight;
 			}
 		}
 		return weights;
@@ -110,12 +127,12 @@ public class AdjacencyListGraph<Value> implements GraphInterface<Value> {
 	 */
 	@Override
 	public void addEdge(Vertex<Value> u, Vertex<Value> v, double weight) {
-		Edge<Value> edge = new Edge<>(u, v, weight);
-		adjacencylist[u.getKey()-1].add(edge);
-		adjacencylist[v.getKey()-1].add(edge);
+		Edge<Value> uedge = new Edge<>(u, v, weight);
+		adjacencylist[u.getKey()-1].add(uedge);
+		Edge<Value> vedge = new Edge<>(v,u,weight);
+		adjacencylist[v.getKey()-1].add(vedge);
 	}
 
-	
 	/**
 	 * This method returns the adjacent vertices for a given vertex
 	 * @param vertex the vertex which adjacency is going to be verified
@@ -130,8 +147,8 @@ public class AdjacencyListGraph<Value> implements GraphInterface<Value> {
 		}
 		return adjacentvertices;
 	}
-	
-	
+
+
 	//PRINCIPAL ALGORITHMS____________________________________________________________________________________________________________
 
 	/**
@@ -144,10 +161,10 @@ public class AdjacencyListGraph<Value> implements GraphInterface<Value> {
 	 */
 	@SuppressWarnings("unchecked")
 	public Vertex<Value>[] BFS(Vertex<Value> source) {
-		
-		Vertex<Value>[] distances = new Vertex[totalvertices];
+
+		Vertex<Value>[] reachable = new Vertex[totalvertices];
 		int key = source.getKey();
-		
+
 		for(Vertex<Value> vertex : vertices) {
 			vertex.setColor("W");
 			vertex.setDistance(Integer.MAX_VALUE);
@@ -166,16 +183,16 @@ public class AdjacencyListGraph<Value> implements GraphInterface<Value> {
 				if(v.getColor().equals(Vertex.WHITE)) {
 					v.setColor(Vertex.GRAY);
 					v.setDistance(u.getDistance()+1);
-					distances[i] = v;
 					v.setPred(u);
+					reachable[i] = v;
 					queue.offer(v);
 				}
 				u.setColor(Vertex.BLACK);
 			}
 		}
-		return distances;
+		return reachable;
 	}
-	
+
 	/**
 	 * This method searchs for adjacent vertices from a source vertex using Depth First Search
 	 * <b>Pre:</b> The graph exists
@@ -193,7 +210,7 @@ public class AdjacencyListGraph<Value> implements GraphInterface<Value> {
 			}
 		}
 	}
-	
+
 	/**
 	 * This method works as an Auxiliar for dfs method using Depth First Search
 	 * <b>Pre:</b> The graph exists
@@ -216,7 +233,7 @@ public class AdjacencyListGraph<Value> implements GraphInterface<Value> {
 		}
 		return time;
 	}
-	
+
 	/**
 	 * This method generates a Minimum Spanning Tree (MST) using Prim's Algorithm
 	 * <b>Pre:</b> The graph exists
@@ -227,13 +244,13 @@ public class AdjacencyListGraph<Value> implements GraphInterface<Value> {
 	 */
 	@SuppressWarnings("unchecked")
 	public double[] prim(Vertex<Value> source) {
-		
+
 		double[] keys = new double[totalvertices];
 		Vertex<Value>[] color = new Vertex[totalvertices];
 		Vertex<Value>[] pred = new Vertex[totalvertices];
-		
+
 		int key = source.getKey();
-		
+
 		for(int i = 0; i<totalvertices; i++) {
 			keys[i] = Integer.MAX_VALUE;
 			color[i].setColor(Vertex.WHITE);
@@ -259,17 +276,38 @@ public class AdjacencyListGraph<Value> implements GraphInterface<Value> {
 		}
 		return keys;
 	}
-	
+
 	/**
 	 * This method generates a Minimum Spanning Tree (MST) using Kruskal Algorithm
 	 * <b>Pre:</b> The graph exists
 	 * <b>Pre:</b> The given source vertex is in the graph
 	 * <b>Pos:</b> The distances from a given source vertex to the rest (including all vertices) are minimum
-	 * @param 
-	 * @return an array of vertices with the minimum cost to cover all vertices in this graph
+	 * @return a list with all the less distances to cover the all vertices in the graph
 	 */
-	public void kruskal() {
-		
+	public ArrayList<Double> kruskal() {
+		ArrayList<Double> keys = new ArrayList<>();
+		ArrayList<Edge<Value>> edges = (ArrayList<Edge<Value>>) getEdges();
+		//EDGES NEED TO BE SORT
+
+		UnionFind disjointset = new UnionFind(totalvertices);
+
+		int edgesize = 0;
+		int i = 0;
+
+		while(edgesize < vertices.size() && i < edges.size()) {
+			Edge<Value> edge = edges.get(i);
+			i++;
+
+			int a = disjointset.find(edge.getU().getKey()-1);
+			int b = disjointset.find(edge.getV().getKey()-1);
+
+			if(a != b) {
+				keys.add(edge.getWeight());
+				edgesize++;
+				disjointset.union(a, b);
+			}
+		}
+		return keys;
 	}
 
 	/**
@@ -282,35 +320,39 @@ public class AdjacencyListGraph<Value> implements GraphInterface<Value> {
 	 * 
 	 */
 	@SuppressWarnings("unchecked")
-	public void dijkstra(Vertex<Value> source){
-		
-		double[] keys = new double[totalvertices];
+	public ArrayList<Edge<Value>> dijkstra(Vertex<Value> source){
+
+		ArrayList<Edge<Value>> minimum = new ArrayList<>();
+
+		double[] distances = new double[totalvertices];
 		Vertex<Value>[] pred = new Vertex[totalvertices];
 		PriorityQueue<Vertex<Value>> queue = new PriorityQueue<>();
-		
+
 		for (int i = 0; i < totalvertices; i++) {
 			Vertex<Value> vertex = vertices.get(i);
 			if(!vertex.equals(source)) {
-				keys[vertex.getKey()-1] = Double.MAX_VALUE;
+				distances[vertex.getKey()-1] = Double.MAX_VALUE;
 				pred[vertex.getKey()-1].setPred(null);
 				queue.offer(vertex);
 			}
 		}
-		
+
 		while(!queue.isEmpty()) {
 			Vertex<Value> u = queue.poll();
 			LinkedList<Edge<Value>> adjacent = adjacencylist[u.getKey()-1];
 			for (int i = 0; i < adjacent.size(); i++) {
 				Vertex<Value> v = adjacent.get(i).getV();
-				double alt = keys[u.getKey()-1] + adjacent.get(v.getKey()-1).getWeight();
-				if(alt<keys[v.getKey()-1]) {
+				double alt = distances[u.getKey()-1] + adjacent.get(v.getKey()-1).getWeight();
+				if(alt<distances[v.getKey()-1]) {
 					queue.remove(v);
-					keys[v.getKey()-1] = alt;
+					minimum.add(new Edge<Value>(u,v,alt));
+					distances[v.getKey()-1] = alt;
 					pred[v.getKey()-1] = u;
 					queue.add(v);
 				}
 			}
 		}
+		return minimum;
 	}
 
 	/**
@@ -322,7 +364,7 @@ public class AdjacencyListGraph<Value> implements GraphInterface<Value> {
 	 * @return an array with all the vertices ordered 
 	 * 
 	 */
-	public void floydWarshall(Vertex<Value> source) { 
+	public double[][] floydWarshall(Vertex<Value> source) { 
 		double[][] weights = getWeightsdMatrix();
 		for (int k = 0; k < weights.length; k++) {
 			for (int i = 0; i < weights.length; i++) {
@@ -333,5 +375,6 @@ public class AdjacencyListGraph<Value> implements GraphInterface<Value> {
 				}
 			}
 		}
+		return weights;
 	}
 } 
