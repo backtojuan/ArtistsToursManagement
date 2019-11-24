@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import datastructures.AdjacencyListGraph;
 import datastructures.Vertex;
-import datastructures.Edge;
 import model.City;
 import model.Location;
 
