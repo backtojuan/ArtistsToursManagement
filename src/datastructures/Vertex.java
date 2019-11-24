@@ -1,6 +1,14 @@
 package datastructures;
 
-public class Vertex<Value> {
+/**
+ * This class manage the necessary attributes and methods to vertices for the graph representation 
+ * @author Lina Johanna Salinas
+ * @author Lina Marcela Acosta
+ * @author Maria Diomar Ordoñez
+ * @author Juan José Valencia
+ * @version 1.0 - November/2019 
+ */
+public class Vertex<Value>{
 	
 	//Attributes for BFS
 	private int distance;
@@ -26,7 +34,7 @@ public class Vertex<Value> {
 	 * @param key the key for this vertex (index)
 	 * @param value the value for this vertex (type)
 	 */
-	public Vertex(int key, Value value) {
+	public Vertex(int key, Value value){
 		this.key = key;
 		this.value = value;
 		this.color = Vertex.WHITE;

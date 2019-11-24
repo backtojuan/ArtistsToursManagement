@@ -3,34 +3,32 @@ package datastructures;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
-import datastructures.AdjacencyListGraph;
-import datastructures.Vertex;
-import datastructures.Edge;
+import datastructures.AdjacencyMatrixGraph;
 import model.City;
 import model.Location;
 
 /**
- * This class manage the necessary attributes and methods to test the datastructures class AdjacencyListGraph
+ * This class manage the necessary attributes and methods to test the datastructures class AdjacencyMatrixGraph
  * @author Lina Johanna Salinas
  * @author Lina Marcela Acosta
  * @author Maria Diomar Ordoñez
  * @author Juan José Valencia
  * @version 1.0 - November/2019 
  */
-public class AdjacencyListGraphTest {
+public class AdjacencyMatrixGraphTest {
 
-	private AdjacencyListGraph<City> map;
+	private AdjacencyMatrixGraph<City> map;
 	
 	private void setUpScenary1() {
-		//Empty
+		//empty
 	}
 	
 	private void setUpScenary2() {
-		map = new AdjacencyListGraph<City>(10);
+		map = new AdjacencyMatrixGraph<City>(10);
 	}
 	
 	private void setUpScenary3() {
-		map = new AdjacencyListGraph<City>(5);
+		map = new AdjacencyMatrixGraph<>(5);
 		map.addVertex(new Vertex<City>(1,new City(Location.AMERICA,"Mexico","Monterrey")));
 		map.addVertex(new Vertex<City>(2,new City(Location.EUROPE,"Italia","Roma")));
 		map.addVertex(new Vertex<City>(3,new City(Location.AFRICA,"Nigeria","Lagos")));
@@ -40,28 +38,28 @@ public class AdjacencyListGraphTest {
 	
 	@Test
 	/**
-	 * This method test the constructor of the datastructures class "AdjacencyListGraph" making sure a graph can be created
+	 * This method test the constructor of the datastructures class "AdjacencyMatrixGraph" making sure a graph can be created
 	 * with its right attributes
 	 * <b>Pos:</b> The graph has been created correctly, is not null and it has the expected vertices added and connected
 	 * between them with the right attributes
 	 */
-	public void testAdjacencyListGraph() {
+	public void testAdjacencyMatrix() {
 		setUpScenary1();
 		assertNull(map,"The map is not null");
-		AdjacencyListGraph<City> map = new AdjacencyListGraph<City>(40);
+		AdjacencyMatrixGraph<City> map = new AdjacencyMatrixGraph<>(40);
 		assertTrue(map.getVertices().isEmpty(),"The graph has already vertices");
 		assertNotNull(map,"The map is null as not expected");
 		assertEquals(40,map.getTotalVertices(),"The total vertices planned to be insert in this graph is not correct");
 		
-		for (int i = 0; i < map.getAdjacencyList().length; i++) {
+		/**for (int i = 0; i < map.getAdjacencyList().length; i++) {
 			assertNotNull(map.getAdjacencyList()[i],"The adjacency List is null");
 			assertTrue(map.getAdjacencyList()[i].isEmpty(),"A vertex has been already determined as adjacent");
-		}
+		}*/
 	}
 	
 	@Test
 	/**
-	 * This method test the addVertex method of the datastructures class "AdjacencyListGraph" making sure the vertices can be inserted 
+	 * This method test the addVertex method of the datastructures class "AdjacencyMatrixGraph" making sure the vertices can be inserted 
 	 * to this graph
 	 * <b>Pos:</b> The vertices were added correctly, they are not null and they have the right values
 	 */
@@ -92,7 +90,7 @@ public class AdjacencyListGraphTest {
 	
 	@Test
 	/**
-	 * This method test the addEdge method of the datastructures class "AdjacencyListGraph" making sure an edge can be created and connect two
+	 * This method test the addEdge method of the datastructures class "AdjacencyMatrixGraph" making sure an edge can be created and connect two
 	 * vertices that has been already inserted to this graph
 	 * <b>Pos:</b> The edge were created correctly, they are not null, connect the right vertices and have the correct weight
 	 */
@@ -104,7 +102,7 @@ public class AdjacencyListGraphTest {
 		map.addEdge(map.getVertices().get(1), map.getVertices().get(3), 1800);
 		map.addEdge(map.getVertices().get(3), map.getVertices().get(4), 700);
 		
-		for (int i = 0; i < map.getAdjacencyList().length; i++) {
+		/**for (int i = 0; i < map.getAdjacencyList().length; i++) {
 			assertTrue(!map.getAdjacencyList()[i].isEmpty(), "There is a vertex without adjacent vertices");
 			for (int j = 0; j < map.getAdjacencyList()[i].size(); j++) {
 				assertNotNull(map.getAdjacencyList()[i].get(j),"The edge is null as not expected");
@@ -123,7 +121,7 @@ public class AdjacencyListGraphTest {
 		assertEquals(1800,map.getAdjacencyList()[3].get(0).getWeight(),"The weight for the edge is not correct");
 		
 		assertEquals(700,map.getAdjacencyList()[3].get(1).getWeight(),"The weight for the edge is not correct");
-		assertEquals(700,map.getAdjacencyList()[4].get(0).getWeight(),"The weight for the edge is not correct");
+		assertEquals(700,map.getAdjacencyList()[4].get(0).getWeight(),"The weight for the edge is not correct");*/
 	}
 	
 	@Test

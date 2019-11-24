@@ -32,24 +32,10 @@ public interface GraphInterface<Value> {
 	public void addEdge(Vertex<Value> u, Vertex<Value> v, double weight);
 
 	/**
-	 * Removes a vertex within the graph
-	 * @param v A vertex to be removed of the graph
-	 * @return True if the vertex was removed or false if the vertex didn't exist
-	 */
-	public void removeVertex(Vertex<Value> v);
-
-	/**
 	 * Gives a list of adjacent vertices of V
 	 * <pre> V Is within the graph
 	 * @param v The vertex to be consulted its adjacent vertices
 	 * @return A list with all the adjacent vertices of V
 	 */
 	public List<Vertex<Value>> vertexAdjacent(Vertex<Value> v);
-	
-	/**
-	 * Determines if the given vertex has been already added to the graph
-	 * @param v the vertex to be verified
-	 * @return a boolean value that indicates if this vertex either exists or no
-	 */
-	public boolean exists(Vertex<Value> v);
 }
