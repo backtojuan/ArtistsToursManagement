@@ -114,7 +114,25 @@ public class AdjacencyListGraph<Value> implements GraphInterface<Value> {
 	 */
 	@Override
 	public void addVertex(Vertex<Value> vertex) {
-		vertices.add(vertex);
+		if(exists(vertex)== false) {
+			vertices.add(vertex);
+		}
+	}
+	
+	@Override
+	/**
+	 * This method checks is the given vertex already exists in the graph
+	 * @param vertex the vertex to be verified
+	 * @return a boolean value indicating if eaither the vertex exists or no
+	 */
+	public boolean exists(Vertex<Value> vertex) {
+		boolean exists = false;
+		for (int i = 0; i < vertices.size() && !exists; i++) {
+			if(vertices.get(i).equals(vertex)) {
+				exists = true;
+			}
+		}
+		return exists;
 	}
 
 	/**

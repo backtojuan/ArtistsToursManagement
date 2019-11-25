@@ -26,6 +26,7 @@ public class Tour {
 
 	private Artist artist;
 	private AdjacencyListGraph<City> map;
+	private AdjacencyListGraph<City> cost;
 	
 	public final static String AFRICA_PATH = "data/africa.txt";
 	public final static String OCEANIA_PATH = "data/oceania.txt";
@@ -119,17 +120,26 @@ public class Tour {
 		String line = br.readLine();
 		
 		map = new AdjacencyListGraph<>(15);
+		cost = new AdjacencyListGraph<>(15);
 		
 		while(line!=null) {
 			String[] cities = line.split(",");
 			
 			int key = Integer.parseInt(cities[0]);
-			String country = cities[1];
-			String name = cities[2];
-			
-			Vertex<City> vertex = new Vertex<City>(key,new City(location,country,name));
+			String country1 = cities[1];
+			String name1 = cities[2];
+			String country2 = cities[3];
+			String name2 = cities[4];
+			int distance = Integer.parseInt(cities[5]);
+			double price = Double.parseDouble(cities[6]);
+			Vertex<City> vertex = new Vertex<City>(key,new City(location,country1,name1));
+			Vertex<City> vertex2 = new Vertex<City>(key,new City(location,country2,name2));
 			map.addVertex(vertex);
-			
+			map.addVertex(vertex2);
+			map.addEdge(vertex, vertex2, distance);
+			cost.addVertex(vertex);
+			cost.addVertex(vertex2);
+			cost.addEdge(vertex, vertex2, price);
 			line = br.readLine();
 		}		
 		br.close();

@@ -38,4 +38,11 @@ public interface GraphInterface<Value> {
 	 * @return A list with all the adjacent vertices of V
 	 */
 	public List<Vertex<Value>> vertexAdjacent(Vertex<Value> v);
+	
+	/**
+	 * This method checks is the given vertex already exists in the graph
+	 * @param vertex the vertex to be verified
+	 * @return a boolean value indicating if eaither the vertex exists or no
+	 */
+	boolean exists(Vertex<Value> vertex);
 }
