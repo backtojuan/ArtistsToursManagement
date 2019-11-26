@@ -32,6 +32,24 @@ public class UnionFind{
 	}
 	
 	/**
+	 * This method returns the current united sets
+	 * <b>Pre:</b> The union find exists
+	 * @return an array representation for the sets that have been already united
+	 */
+	public int[] getParent() {
+		return parent;
+	}
+	
+	/**
+	 * This method returns the current sets that are not still united
+	 * <b>Pre:</b> The union find exists
+	 * @return an array representation for the current non-united sets
+	 */
+	public int[] getRank() {
+		return rank;
+	}
+	
+	/**
 	 * This method finds the parent for a given element key in the set
 	 * <b>Pre:</b> The union-find structure exists
 	 * <b>Pos:</b> The parent for the given element is found

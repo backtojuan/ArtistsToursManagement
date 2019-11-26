@@ -175,34 +175,34 @@ public class AdjacencyListGraph<Value> implements GraphInterface<Value> {
 	 * <b>Pre:</b> The given source vertex is in the graph
 	 * <b>Pos:</b> The distances from a given source vertex to its all adjacent vertices are calculated correctly 
 	 * @param source the vertex from where it needs to be calculated the distances to the rest of adjacent vertices
-	 * @return an array of distances from a given source vertex to its all adjacent vertices
+	 * @return a list of distances from a given source vertex to its all adjacent vertices
 	 */
-	@SuppressWarnings("unchecked")
-	public Vertex<Value>[] BFS(Vertex<Value> source) {
+	public ArrayList<Vertex<Value>> BFS(Vertex<Value> source) {
 
-		Vertex<Value>[] reachable = new Vertex[totalvertices];
+		ArrayList<Vertex<Value>> reachable = new ArrayList<>();
 		int key = source.getKey();
 
 		for(Vertex<Value> vertex : vertices) {
-			vertex.setColor("W");
+			vertex.setColor(Vertex.WHITE);
 			vertex.setDistance(Integer.MAX_VALUE);
 			vertex.setPred(null);
 		}
 		source.setColor(Vertex.GRAY);
 		source.setDistance(0);
 		source.setPred(null);
+		reachable.add(source);
 		PriorityQueue<Vertex<Value>> queue = new PriorityQueue<>();
 		queue.offer(source);
-		while(queue != null) {
+		while(!queue.isEmpty()) {
 			Vertex<Value> u = queue.poll();
 			ArrayList<Vertex<Value>> adjacent = (ArrayList<Vertex<Value>>) vertexAdjacent(u);
 			for (int i = 0; i < adjacent.size(); i++) {
-				Vertex<Value> v = adjacent.get(i); 
+				Vertex<Value> v = adjacent.get(i);
 				if(v.getColor().equals(Vertex.WHITE)) {
 					v.setColor(Vertex.GRAY);
 					v.setDistance(u.getDistance()+1);
 					v.setPred(u);
-					reachable[i] = v;
+					reachable.add(v);
 					queue.offer(v);
 				}
 				u.setColor(Vertex.BLACK);
@@ -243,12 +243,12 @@ public class AdjacencyListGraph<Value> implements GraphInterface<Value> {
 		for(Vertex<Value> adj : adjacent) {
 			if(adj.getColor().equals(Vertex.WHITE)) {
 				adj.setPred(vertex);
-				dfsVisit(adj, time);
+				time = dfsVisit(adj, time);
 			}
-			vertex.setColor(Vertex.BLACK);
-			time = time+1;
-			vertex.setFinishtime(time);
 		}
+		vertex.setColor(Vertex.BLACK);
+		time = time+1;
+		vertex.setFinishtime(time);
 		return time;
 	}
 
@@ -271,13 +271,15 @@ public class AdjacencyListGraph<Value> implements GraphInterface<Value> {
 
 		for(int i = 0; i<totalvertices; i++) {
 			keys[i] = Integer.MAX_VALUE;
+			color[i] = vertices.get(i);
 			color[i].setColor(Vertex.WHITE);
+			pred[i] = vertices.get(i);
 			pred[i].setPred(null);
 		}
 		keys[0] = 0;
 		PriorityQueue<Vertex<Value>> queue = new PriorityQueue<>();
 		for(Vertex<Value> vertex : vertices) {
-			queue.add(vertex);
+			queue.offer(vertex);
 		}
 		while(!queue.isEmpty()) {
 			Vertex<Value> u = queue.poll();
@@ -302,8 +304,8 @@ public class AdjacencyListGraph<Value> implements GraphInterface<Value> {
 	 * <b>Pos:</b> The distances from a given source vertex to the rest (including all vertices) are minimum
 	 * @return a list with all the less distances to cover the all vertices in the graph
 	 */
-	public ArrayList<Double> kruskal() {
-		ArrayList<Double> keys = new ArrayList<>();
+	public ArrayList<Edge<Value>> kruskal() {
+		ArrayList<Edge<Value>> keys = new ArrayList<>();
 		ArrayList<Edge<Value>> edges = (ArrayList<Edge<Value>>) getEdges();
 		//EDGES NEED TO BE SORT
 
@@ -320,7 +322,7 @@ public class AdjacencyListGraph<Value> implements GraphInterface<Value> {
 			int b = disjointset.find(edge.getV().getKey()-1);
 
 			if(a != b) {
-				keys.add(edge.getWeight());
+				keys.add(edge);
 				edgesize++;
 				disjointset.union(a, b);
 			}
@@ -350,6 +352,7 @@ public class AdjacencyListGraph<Value> implements GraphInterface<Value> {
 			Vertex<Value> vertex = vertices.get(i);
 			if(!vertex.equals(source)) {
 				distances[vertex.getKey()-1] = Double.MAX_VALUE;
+				pred[vertex.getKey()-1] = vertex;
 				pred[vertex.getKey()-1].setPred(null);
 				queue.offer(vertex);
 			}
@@ -382,7 +385,7 @@ public class AdjacencyListGraph<Value> implements GraphInterface<Value> {
 	 * @return an array with all the vertices ordered 
 	 * 
 	 */
-	public double[][] floydWarshall(Vertex<Value> source) { 
+	public double[][] floydWarshall() { 
 		double[][] weights = getWeightsdMatrix();
 		for (int k = 0; k < weights.length; k++) {
 			for (int i = 0; i < weights.length; i++) {

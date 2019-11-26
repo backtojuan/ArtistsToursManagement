@@ -121,6 +121,22 @@ public class AdjacencyMatrixGraph<Value> implements GraphInterface<Value>{
 		}
 	}
 	
+	@Override
+	/**
+	 * This method checks is the given vertex already exists in the graph
+	 * @param vertex the vertex to be verified
+	 * @return a boolean value indicating if eaither the vertex exists or no
+	 */
+	public boolean exists(Vertex<Value> vertex) {
+		boolean exists = false;
+		for (int i = 0; i < vertices.size() && !exists; i++) {
+			if(vertices.get(i).equals(vertex)) {
+				exists = true;
+			}
+		}
+		return exists;
+	}
+	
 	/**
 	 * This method adds an edge in the graph connecting two vertices
 	 * <b>Pre:</b> the vertices that are going to be connected by this edge already exists
@@ -166,12 +182,11 @@ public class AdjacencyMatrixGraph<Value> implements GraphInterface<Value>{
 	 * <b>Pre:</b> The given source vertex is in the graph
 	 * <b>Pos:</b> The distances from a given source vertex to its all adjacent vertices are calculated correctly 
 	 * @param source the vertex from where it needs to be calculated the distances to the rest of adjacent vertices
-	 * @return an array of distances from a given source vertex to its all adjacent vertices
+	 * @return a list of distances from a given source vertex to its all adjacent vertices
 	 */
-	@SuppressWarnings("unchecked")
-	public Vertex<Value>[] BFS(Vertex<Value> source) {
+	public ArrayList<Vertex<Value>> BFS(Vertex<Value> source) {
 		
-		Vertex<Value>[] reachable = new Vertex[totalvertices];
+		ArrayList<Vertex<Value>> reachable = new ArrayList<>();
 		int key = source.getKey();
 		
 		for(Vertex<Value> vertex : vertices) {
@@ -182,9 +197,10 @@ public class AdjacencyMatrixGraph<Value> implements GraphInterface<Value>{
 		source.setColor(Vertex.GRAY);
 		source.setDistance(0);
 		source.setPred(null);
+		reachable.add(source);
 		PriorityQueue<Vertex<Value>> queue = new PriorityQueue<Vertex<Value>>();
 		queue.offer(source);
-		while(queue != null) {
+		while(!queue.isEmpty()) {
 			Vertex<Value> u = queue.poll();
 			ArrayList<Vertex<Value>> adjacent = (ArrayList<Vertex<Value>>) vertexAdjacent(u);
 			for(int i = 0; i < adjacent.size(); i++) {
@@ -193,7 +209,7 @@ public class AdjacencyMatrixGraph<Value> implements GraphInterface<Value>{
 					v.setColor(Vertex.GRAY);
 					v.setDistance(u.getDistance()+1);
 					v.setPred(u);
-					reachable[i] = v;
+					reachable.add(v);
 					queue.offer(v);
 				}
 				u.setColor(Vertex.BLACK);
@@ -234,12 +250,13 @@ public class AdjacencyMatrixGraph<Value> implements GraphInterface<Value>{
 		for(Vertex<Value> adj : adjacent) {
 			if(adj.getColor().equals(Vertex.WHITE)) {
 				adj.setPred(vertex);
-				dfsVisit(adj, time);
+				time = dfsVisit(adj, time);
 			}
-			vertex.setColor(Vertex.BLACK);
-			time = time+1;
-			vertex.setFinishtime(time);
 		}
+
+		vertex.setColor(Vertex.BLACK);
+		time = time+1;
+		vertex.setFinishtime(time);
 		return time;
 	}
 	
@@ -262,7 +279,9 @@ public class AdjacencyMatrixGraph<Value> implements GraphInterface<Value>{
 		
 		for(int i = 0; i<totalvertices; i++) {
 			keys[i] = Integer.MAX_VALUE;
+			color[i] = vertices.get(i);
 			color[i].setColor(Vertex.WHITE);
+			pred[i] = vertices.get(i);
 			pred[i].setPred(null);
 		}
 		keys[0] = 0;
@@ -294,8 +313,8 @@ public class AdjacencyMatrixGraph<Value> implements GraphInterface<Value>{
 	 * <b>Pos:</b> The distances from a given source vertex to the rest (including all vertices) are minimum 
 	 * @return a list with all the less distances to cover all vertices in the graph
 	 */
-	public ArrayList<Double> kruskal() {
-		ArrayList<Double> keys = new ArrayList<>();
+	public ArrayList<Edge<Value>> kruskal() {
+		ArrayList<Edge<Value>> keys = new ArrayList<>();
 		ArrayList<Edge<Value>> edges = (ArrayList<Edge<Value>>) getEdges();
 		//EDGES NEED TO BE SORT
 		
@@ -312,7 +331,7 @@ public class AdjacencyMatrixGraph<Value> implements GraphInterface<Value>{
 			int b = disjointset.find(edge.getV().getKey()-1);
 			
 			if(a != b) {
-				keys.add(edge.getWeight());
+				keys.add(edge);
 				edgesize++;
 				disjointset.union(a, b);
 			}
@@ -374,7 +393,7 @@ public class AdjacencyMatrixGraph<Value> implements GraphInterface<Value>{
 	 * @return an array with all the vertices ordered 
 	 * 
 	 */
-	public double[][] floydWarshall(Vertex<Value> source) { 
+	public double[][] floydWarshall() { 
 		double[][] weights = getWeightsMatrix();
 		for (int k = 0; k < weights.length; k++) {
 			for (int i = 0; i < weights.length; i++) {
@@ -386,21 +405,5 @@ public class AdjacencyMatrixGraph<Value> implements GraphInterface<Value>{
 			}
 		}
 		return weights;
-	}
-
-	@Override
-	/**
-	 * This method checks is the given vertex already exists in the graph
-	 * @param vertex the vertex to be verified
-	 * @return a boolean value indicating if eaither the vertex exists or no
-	 */
-	public boolean exists(Vertex<Value> vertex) {
-		boolean exists = false;
-		for (int i = 0; i < vertices.size() && !exists; i++) {
-			if(vertices.get(i).equals(vertex)) {
-				exists = true;
-			}
-		}
-		return exists;
 	}
 }

@@ -1,5 +1,7 @@
 package datastructures;
 
+import java.util.Comparator;
+
 /**
  * This class manage the necessary attributes and methods to vertices for the graph representation 
  * @author Lina Johanna Salinas
@@ -8,7 +10,7 @@ package datastructures;
  * @author Juan José Valencia
  * @version 1.0 - November/2019 
  */
-public class Vertex<Value>{
+public class Vertex<Value> implements Comparator<Vertex<Value>>{
 	
 	//Attributes for BFS
 	private int distance;
@@ -177,5 +179,11 @@ public class Vertex<Value>{
 	 */
 	public String toString() {
 		return value.toString();
+	}
+
+	@Override
+	public int compare(Vertex<Value> vertex1, Vertex<Value> vertex2) {
+		
+		return 0;
 	}
 }

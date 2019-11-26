@@ -2,6 +2,8 @@ package datastructures;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 import datastructures.AdjacencyListGraph;
 import datastructures.Vertex;
@@ -20,14 +22,25 @@ public class AdjacencyListGraphTest {
 
 	private AdjacencyListGraph<City> map;
 	
+	/**
+	 * This scenary is useful when previous objects do not need to be created before testing a function of the system
+	 */
 	private void setUpScenary1() {
 		//Empty
 	}
 	
+	/**
+	 * This scenary is useful when previous objects do need to be created before testing a function of the system 
+	 * (The graph is just created)
+	 */
 	private void setUpScenary2() {
 		map = new AdjacencyListGraph<City>(10);
 	}
 	
+	/**
+	 * This scenary is useful when previous objects do need to be created before testing a function of the system
+	 * (The graph is created and has vertices) 
+	 */
 	private void setUpScenary3() {
 		map = new AdjacencyListGraph<City>(5);
 		map.addVertex(new Vertex<City>(1,new City(Location.AMERICA,"Mexico","Monterrey")));
@@ -37,6 +50,10 @@ public class AdjacencyListGraphTest {
 		map.addVertex(new Vertex<City>(5,new City(Location.OCEANIA,"Australia","Darwin")));
 	}
 	
+	/**
+	 * This scenary is useful when previous objects do need to be created before testing a function of the system
+	 * (The graph is created, and has connected vertices by just one single edge) (weight do represent cost or distance)
+	 */
 	private void setUpScenary4() {
 		map = new AdjacencyListGraph<City>(5);
 		
@@ -50,6 +67,31 @@ public class AdjacencyListGraphTest {
 		map.addEdge(map.getVertices().get(2), map.getVertices().get(1), 2500);
 		map.addEdge(map.getVertices().get(3), map.getVertices().get(1), 1800);
 		map.addEdge(map.getVertices().get(3), map.getVertices().get(4), 700);
+	}
+	
+	/**
+	 * This scenary is useful when previous objects do need to be created before testing a function of the system 
+	 * (The graph is created, and has connected vertices by multiedges) (weight do represent cost or distance)
+	 */
+	private void setUpScenary5() {
+		map = new AdjacencyListGraph<City>(5);
+		
+		map.addVertex(new Vertex<City>(1,new City(Location.AMERICA,"Mexico","Monterrey")));
+		map.addVertex(new Vertex<City>(2,new City(Location.EUROPE,"Italia","Roma")));
+		map.addVertex(new Vertex<City>(3,new City(Location.AFRICA,"Nigeria","Lagos")));
+		map.addVertex(new Vertex<City>(4,new City(Location.ASIA,"Japan","Kioto")));
+		map.addVertex(new Vertex<City>(5,new City(Location.OCEANIA,"Australia","Darwin")));
+		
+		map.addEdge(map.getVertices().get(0), map.getVertices().get(2),3700);
+		map.addEdge(map.getVertices().get(0), map.getVertices().get(2),500);
+		map.addEdge(map.getVertices().get(0), map.getVertices().get(1), 850);
+		
+		map.addEdge(map.getVertices().get(2), map.getVertices().get(1), 2500);
+		map.addEdge(map.getVertices().get(3), map.getVertices().get(1), 600);
+		map.addEdge(map.getVertices().get(3), map.getVertices().get(1), 1800);
+		
+		map.addEdge(map.getVertices().get(3), map.getVertices().get(4), 700);
+		map.addEdge(map.getVertices().get(3), map.getVertices().get(4), 325);
 	}
 	
 	@Test
@@ -218,7 +260,17 @@ public class AdjacencyListGraphTest {
 	 * to find it
 	 */
 	public void testBreadthFirstSearch() {
-		
+		setUpScenary4();
+		ArrayList<Vertex<City>> bfs = map.BFS(map.getVertices().get(0));
+		assertNotNull(bfs,"The resultant array is null");
+		Vertex<City> pred = null;
+		for (int i = 0; i < bfs.size(); i++) {
+			assertNotNull(bfs.get(i), "The reachable vertex is null");
+			assertEquals(pred,bfs.get(i).getPred(),"The predecessor vertex is not correct");
+			assertEquals(Vertex.BLACK,bfs.get(i).getColor(),"The vertex is not black");
+			assertEquals(i,bfs.get(i).getDistance(),"The distance until this vertex is not correct");
+			pred = bfs.get(i);
+		}
 	}
 	
 	@Test
@@ -229,7 +281,25 @@ public class AdjacencyListGraphTest {
 	 * discoverment and finishing
 	 */
 	public void testDepthFirstSearch() {
+		setUpScenary4();
+		map.dfs();
+		for (int i = 0; i < map.getVertices().size(); i++) {
+			assertNotNull(map.getVertices().get(i), "The vertex is now null");
+		}
+		assertEquals(1,map.getVertices().get(0).getInitialtime(),"The time taken to find this vertex is not correct");
+		assertEquals(10,map.getVertices().get(0).getFinishtime(),"The time taken to finish with the search of this vertex is not correct");
+
+		assertEquals(3,map.getVertices().get(1).getInitialtime(),"The time taken to find this vertex is not correct");
+		assertEquals(8,map.getVertices().get(1).getFinishtime(),"The time taken to finish with the search of this vertex is not correct");
+
+		assertEquals(2,map.getVertices().get(2).getInitialtime(),"The time taken to find this vertex is not correct");
+		assertEquals(9,map.getVertices().get(2).getFinishtime(),"The time taken to finish with the search of this vertex is not correct");
 		
+		assertEquals(4,map.getVertices().get(3).getInitialtime(),"The time taken to find this vertex is not correct");
+		assertEquals(7,map.getVertices().get(3).getFinishtime(),"The time taken to finish with the search of this vertex is not correct");
+
+		assertEquals(5,map.getVertices().get(4).getInitialtime(),"The time taken to find this vertex is not correct");
+		assertEquals(6,map.getVertices().get(4).getFinishtime(),"The time taken to finish with the search of this vertex is not correct");
 	}
 	
 	@Test
@@ -239,7 +309,13 @@ public class AdjacencyListGraphTest {
 	 * <b>Pos:</b> The prim was succesfull, the MST covers all vertices and the graph is minimum
 	 */
 	public void testPrim() {
+		setUpScenary5();
+		/**double[] prim = map.prim(map.getVertices().get(0));
 		
+		assertNotNull(prim, "The resultant array is null");
+		for (int i = 0; i < prim.length; i++) {
+			System.out.println(prim[i]);
+		}*/
 	}
 	
 	@Test
@@ -249,7 +325,12 @@ public class AdjacencyListGraphTest {
 	 * <b>Pos:</b> The kruskal was succesfull, the MST from the forest covers all vertices and the graph is minimum
 	 */
 	public void testKruskal() {
-		
+		setUpScenary5();
+		ArrayList<Edge<City>> kruskal = map.kruskal();
+		assertNotNull(kruskal, "The resultant list is null");
+		for (int i = 0; i < kruskal.size(); i++) {
+			assertNotNull(kruskal.get(i), "The edge is null");
+		}
 	}
 	
 	@Test
@@ -259,7 +340,12 @@ public class AdjacencyListGraphTest {
 	 * <b>Pos:</b> The dijkstra was succesfull, the shortest path from a source vertex to the rest is minimum
 	 */
 	public void testDijkstra() {
-		
+		setUpScenary5();
+		/**ArrayList<Edge<City>> dijkstra = map.dijkstra(map.getVertices().get(0));
+		assertNotNull(dijkstra,"The resultant list is null");
+		for (int i = 0; i < dijkstra.size(); i++) {
+			System.out.println(dijkstra.get(i));
+		}*/
 	}
 	
 	@Test
@@ -269,6 +355,29 @@ public class AdjacencyListGraphTest {
 	 * <b>Pos:</b> The floydwarshall was succesfull, the shortest path between every pair of vertices is minimum
 	 */
 	public void testFloydWarshall() {
+		setUpScenary5();
+		double[][] floydwarshall = map.floydWarshall();
+		assertNotNull(floydwarshall,"The resultant matrix is null");
+		for (int i = 0; i < floydwarshall.length; i++) {
+			for (int j = 0; j < floydwarshall.length; j++) {
+				if(i==j) {
+					assertEquals(0,floydwarshall[i][j],"There's a cycle for a vertex");
+				}
+				else {
+					assertEquals(floydwarshall[i][j],floydwarshall[j][i],"The matrix is not symmetric");
+				}
+			}
+		}
+		assertEquals(850,map.getAdjacencyList()[0].get(2).getWeight(),"The cost for this edge is not correct");
+		assertEquals(500,map.getAdjacencyList()[0].get(1).getWeight(),"The cost for this edge is not correct");
+		assertEquals(2650,map.getAdjacencyList()[0].get(2).getWeight() + map.getAdjacencyList()[1].get(3).getWeight(),
+				"The cost for this edge is not correct");
+		assertEquals(2975,map.getAdjacencyList()[0].get(2).getWeight() + map.getAdjacencyList()[1].get(3).getWeight(),
+				+ map.getAdjacencyList()[3].get(3).getWeight(),"The cost for this edge is not correct");
 		
-	}
+		assertEquals(1350,map.getAdjacencyList()[2].get(1).getWeight() + map.getAdjacencyList()[0].get(2).getWeight(),
+				"The cost for this edge is not correct");
+		assertEquals(3150,map.getAdjacencyList()[2].get(1).getWeight() + map.getAdjacencyList()[0].get(2).getWeight(),
+				+ map.getAdjacencyList()[1].get(3).getWeight(),"The cost for this edge is not correct");
+		}
 }
