@@ -55,16 +55,20 @@ public class ArtistsTourManagementController {
     private DatePicker finaldate;
 
     @FXML
-    private Label tour;
+    private Label tour1;
 
     @FXML
-    private Label artist;
+    private Label artist1;
 
     @FXML
-    private Label label;
+    private Label min;
     
     @FXML
     private Button tourbutton;
+    @FXML
+    private Label label;
+    private Tour tour;
+    private Artist artist;
     
     @FXML
     private void initialize() {
@@ -95,13 +99,13 @@ public class ArtistsTourManagementController {
 	    		String initdate = initialdate.getValue().toString();
 	    		String finishdate = finaldate.getValue().toString(); 
 	    		
-	    		this.tour.setText(this.tour.getText() + " " + tourName);
+	    		this.tour1.setText(this.tour1.getText() + " " + tourName);
 	    		this.label.setText(this.label.getText() + " " + labelname);
-	    		this.artist.setText(this.artist.getText() + " " + name);
+	    		this.artist1.setText(this.artist1.getText() + " " + name);
 	    		tourbutton.setDisable(true);
 	    		
-	    		Artist artist = new Artist(name, labelname);
-	    		Tour tour = new Tour(continent.getValue(),tourName,initdate,finishdate,getPath());
+	    		artist = new Artist(name, labelname);
+	    		tour = new Tour(continent.getValue(),tourName,initdate,finishdate,getPath());
 	    	    if(continent.getValue().toString() == "AFRICA") {
 	    	    	image1.setImage(new Image("gui/imgs/africa_distances (2).png"));
 	    	    }else if(continent.getValue().toString() == "AMERICA") {
@@ -113,14 +117,14 @@ public class ArtistsTourManagementController {
 	    	    }else if(continent.getValue().toString() == "EUROPE") {
 	    	    	image1.setImage(new Image("gui/imgs/europe_distances (2).png"));
 	    	    }
-	    	    
+	    	    /*
 	    	    //Kruskal
 	    	    ArrayList<Edge<City>> kruskalCost = tour.getCost().kruskal();
 	    	    ArrayList<Edge<City>> kruskalMap = tour.getMap().kruskal();
 	    	    //FW
 	    	    double[][] fwCost  = tour.getCost().floydWarshall();
 	    	    double[][] fwMap  = tour.getCost().floydWarshall();
-	    	    
+	    	    **/
 	    	}
     	}
     	catch(NullPointerException npe) {
@@ -176,4 +180,30 @@ public class ArtistsTourManagementController {
     	}
     	return path;
     }
+    @FXML
+    void costMin(ActionEvent event) {
+    	ArrayList<Edge<City>> kruskalCost = tour.getCost().kruskal();
+    	String mensaje = "";
+    	for(int i = 0; i < kruskalCost.size(); i++) {
+    		mensaje+= kruskalCost.get(i).toString();
+    		mensaje += "\n";
+    	}
+    	min.setText(mensaje);
+    }
+
+    @FXML
+    void distanceMin(ActionEvent event) {
+    	ArrayList<Edge<City>> kruskalMap = tour.getMap().kruskal();
+    	String mensaje = "";
+    	for(int i = 0; i < kruskalMap.size(); i++) {
+    		mensaje+= kruskalMap.get(i).toString();
+    		mensaje += "\n";
+    	}
+    	min.setText(mensaje);
+    }
+    @FXML
+    void floyd(ActionEvent event) {
+
+    }
+    
 }

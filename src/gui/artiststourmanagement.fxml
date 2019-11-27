@@ -196,9 +196,13 @@
                         <AnchorPane prefHeight="445.0" prefWidth="784.0">
                            <children>
                               <ImageView fx:id="image1" fitHeight="438.0" fitWidth="534.0" layoutX="223.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                              <Label fx:id="min" layoutX="14.0" layoutY="26.0" prefHeight="396.0" prefWidth="307.0" />
                            </children>
                         </AnchorPane>
                         <Button layoutX="791.0" layoutY="14.0" mnemonicParsing="false" onAction="#costMap" prefHeight="34.0" prefWidth="112.0" text="See Cost's Map" />
+                        <Button layoutX="791.0" layoutY="74.0" mnemonicParsing="false" onAction="#distanceMin" prefHeight="55.0" prefWidth="151.0" text="Minimum distance map" />
+                        <Button layoutX="791.0" layoutY="146.0" mnemonicParsing="false" onAction="#costMin" prefHeight="55.0" prefWidth="151.0" text="Minimum cost map" />
+                        <Button layoutX="791.0" layoutY="226.0" mnemonicParsing="false" onAction="#floyd" prefHeight="55.0" prefWidth="151.0" text="All minimum distances" />
                      </children>
                   </AnchorPane>
                </content></Tab>
