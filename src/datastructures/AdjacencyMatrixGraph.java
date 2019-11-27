@@ -1,6 +1,7 @@
 package datastructures;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -285,7 +286,7 @@ public class AdjacencyMatrixGraph<Value> implements GraphInterface<Value>{
 			pred[i].setPred(null);
 		}
 		keys[0] = 0;
-		PriorityQueue<Vertex<Value>> queue = new PriorityQueue<Vertex<Value>>();
+		PriorityQueue<Vertex<Value>> queue = new PriorityQueue<Vertex<Value>>(new VertexComparator<Value>());
 		for(Vertex<Value> vertex : vertices) {
 			queue.add(vertex);
 		}
@@ -316,7 +317,7 @@ public class AdjacencyMatrixGraph<Value> implements GraphInterface<Value>{
 	public ArrayList<Edge<Value>> kruskal() {
 		ArrayList<Edge<Value>> keys = new ArrayList<>();
 		ArrayList<Edge<Value>> edges = (ArrayList<Edge<Value>>) getEdges();
-		//EDGES NEED TO BE SORT
+		Collections.sort(edges, new EdgeComparator<Value>());
 		
 		UnionFind disjointset = new UnionFind(totalvertices);
 		
@@ -355,7 +356,7 @@ public class AdjacencyMatrixGraph<Value> implements GraphInterface<Value>{
 		
 		double[] distances = new double[totalvertices];
 		Vertex<Value>[] pred = new Vertex[totalvertices];
-		PriorityQueue<Vertex<Value>> queue = new PriorityQueue<>();
+		PriorityQueue<Vertex<Value>> queue = new PriorityQueue<>(new VertexComparator<Value>());
 		
 		for (int i = 0; i < totalvertices; i++) {
 			Vertex<Value> vertex = vertices.get(i);

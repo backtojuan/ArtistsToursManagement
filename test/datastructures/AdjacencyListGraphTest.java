@@ -310,12 +310,12 @@ public class AdjacencyListGraphTest {
 	 */
 	public void testPrim() {
 		setUpScenary5();
-		/**double[] prim = map.prim(map.getVertices().get(0));
+		double[] prim = map.prim(map.getVertices().get(0));
 		
 		assertNotNull(prim, "The resultant array is null");
 		for (int i = 0; i < prim.length; i++) {
 			System.out.println(prim[i]);
-		}*/
+		}
 	}
 	
 	@Test

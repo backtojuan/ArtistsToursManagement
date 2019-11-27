@@ -10,7 +10,7 @@ import java.util.Comparator;
  * @author Juan José Valencia
  * @version 1.0 - November/2019 
  */
-public class Vertex<Value> implements Comparator<Vertex<Value>>{
+public class Vertex<Value>{
 	
 	//Attributes for BFS
 	private int distance;
@@ -179,11 +179,5 @@ public class Vertex<Value> implements Comparator<Vertex<Value>>{
 	 */
 	public String toString() {
 		return value.toString();
-	}
-
-	@Override
-	public int compare(Vertex<Value> vertex1, Vertex<Value> vertex2) {
-		
-		return 0;
 	}
 }
