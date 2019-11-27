@@ -31,7 +31,7 @@ public class TourTest {
 	public void testTour() {
 		setUpScenary1();
 		try {
-			Tour tour = new Tour(Location.AFRICA, "shawn mendes : the tour", "2019-11-25", "2020-01-31", Tour.AFRICA_PATH);
+			Tour tour = new Tour(Location.AFRICA, "shawn mendes : the tour", "2019-11-25", "2020-01-31", Tour.AFRICA_PATH,Tour.AFRICA_VERTEX);
 			assertNotNull(tour,"The object is null");
 			assertEquals("shawn mendes : the tour", tour.getName(),"The name is not correct");
 			assertEquals("2019-11-25", tour.getInitDate(),"The initial date is not correct");

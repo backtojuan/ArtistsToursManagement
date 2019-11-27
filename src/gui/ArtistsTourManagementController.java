@@ -105,7 +105,7 @@ public class ArtistsTourManagementController {
 	    		tourbutton.setDisable(true);
 	    		
 	    		artist = new Artist(name, labelname);
-	    		tour = new Tour(continent.getValue(),tourName,initdate,finishdate,getPath());
+	    		tour = new Tour(continent.getValue(),tourName,initdate,finishdate,getPath(),getPathVertex());
 	    	    if(continent.getValue().toString() == "AFRICA") {
 	    	    	image1.setImage(new Image("gui/imgs/africa_distances (2).png"));
 	    	    }else if(continent.getValue().toString() == "AMERICA") {
@@ -176,7 +176,27 @@ public class ArtistsTourManagementController {
     		path = Tour.EUROPE_PATH;
     	}
     	else {
-    		path = Tour.OCEANIA_PATH;
+    		path = Tour.AUSTRALIA_VERTEX;
+    	}
+    	return path;
+    }
+    
+    private String getPathVertex() {
+    	String path;
+    	if(continent.getValue().equals(Location.AFRICA)){
+    		path = Tour.AFRICA_VERTEX;
+    	}
+    	else if(continent.getValue().equals(Location.AMERICA)) {
+    		path = Tour.AMERICA_VERTEX;
+    	}
+    	else if(continent.getValue().equals(Location.ASIA)) {
+    		path = Tour.ASIA_VERTEX;
+    	}
+    	else if(continent.getValue().equals(Location.EUROPE)) {
+    		path = Tour.EUROPE_VERTEX;
+    	}
+    	else {
+    		path = Tour.AUSTRALIA_VERTEX;
     	}
     	return path;
     }

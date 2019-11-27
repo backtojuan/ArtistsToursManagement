@@ -29,10 +29,16 @@ public class Tour {
 	private AdjacencyListGraph<City> cost;
 	
 	public final static String AFRICA_PATH = "data/africa.txt";
-	public final static String OCEANIA_PATH = "data/oceania.txt";
+	public final static String AUSTRALIA_PATH = "data/australia.txt";
 	public final static String EUROPE_PATH = "data/europe.txt";
 	public final static String AMERICA_PATH = "data/america.txt";
 	public final static String ASIA_PATH = "data/asia.txt";
+	
+	public final static String AFRICA_VERTEX = "data/africaVertex.txt";
+	public final static String AUSTRALIA_VERTEX = "data/australiaVertex.txt";
+	public final static String EUROPE_VERTEX = "data/europeVertex.txt";
+	public final static String AMERICA_VERTEX = "data/americaVertex.txt";
+	public final static String ASIA_VERTEX = "data/asiaVertex.txt";
 	
 	private String path;
 	
@@ -43,12 +49,12 @@ public class Tour {
 	 * @param finalDate the finishing date for the tour
 	 * @throws IOException 
 	 */
-	public Tour(Location location,String name, String initDate, String finalDate, String path) throws IOException {
+	public Tour(Location location,String name, String initDate, String finalDate, String path,String pathVertex) throws IOException {
 		this.location = location;
 		this.name = name;
 		this.initDate = initDate;
 		this.finalDate = finalDate;
-		load(path);
+		load(path,pathVertex);
 	}
 	
 	/**
@@ -114,31 +120,53 @@ public class Tour {
 	 * @param path the path from where the cities are going to be load
 	 * @throws IOException in the case that the file that contains the cities cannot be loaded
 	 */
-	public void load(String path) throws IOException{
+	
+	public void loadVertex(String pathVertex) throws IOException{
 		
-		BufferedReader br = new BufferedReader(new FileReader(new File(path)));
+		BufferedReader br = new BufferedReader(new FileReader(new File(pathVertex)));
 		String line = br.readLine();
-		
+
 		map = new AdjacencyListGraph<>(15);
 		cost = new AdjacencyListGraph<>(15);
+		while(line!=null) {
+			String[] cities = line.split(",");
+
+			int key = Integer.parseInt(cities[0]);
+			String country = cities[1];
+			String name = cities[2];
+
+			Vertex<City> vertex = new Vertex<City>(key,new City(location,country,name));
+			map.addVertex(vertex);
+			cost.addVertex(vertex);
+			line = br.readLine();
+		}		
+		br.close();
+	}
+	
+	public void load(String path,String pathVertex) throws IOException{
 		
+		loadVertex(pathVertex);
+		BufferedReader br = new BufferedReader(new FileReader(new File(path)));
+		String line = br.readLine();
+				
 		while(line!=null) {
 			String[] cities = line.split(",");
 			
-			int key = Integer.parseInt(cities[0]);
-			String country1 = cities[1];
 			String name1 = cities[2];
-			String country2 = cities[3];
 			String name2 = cities[4];
-			int distance = Integer.parseInt(cities[5]);
+			double distance = Double.parseDouble(cities[5]);
 			double price = Double.parseDouble(cities[6]);
-			Vertex<City> vertex = new Vertex<City>(key,new City(location,country1,name1));
-			Vertex<City> vertex2 = new Vertex<City>(key,new City(location,country2,name2));
-			map.addVertex(vertex);
-			map.addVertex(vertex2);
+			
+			Vertex<City> vertex = null;
+			Vertex<City> vertex2 = null;
+			for(int i = 0; i<map.getTotalVertices(); i++) {
+				if((map.getVertices().get(i).getValue().getName()).equals(name1)) {
+					vertex = map.getVertices().get(i);
+				}if((map.getVertices().get(i).getValue().getName()).equals(name2)) {
+					vertex2 = map.getVertices().get(i);
+				}
+			}
 			map.addEdge(vertex, vertex2, distance);
-			cost.addVertex(vertex);
-			cost.addVertex(vertex2);
 			cost.addEdge(vertex, vertex2, price);
 			line = br.readLine();
 		}		
