@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import datastructures.AdjacencyListGraph;
 import javafx.collections.FXCollections;
@@ -112,6 +113,14 @@ public class ArtistsTourManagementController {
 	    	    }else if(continent.getValue().toString() == "EUROPE") {
 	    	    	image1.setImage(new Image("gui/imgs/europe_distances (2).png"));
 	    	    }
+	    	    
+	    	    //Kruskal
+	    	    ArrayList<Edge<City>> kruskalCost = tour.getCost().kruskal();
+	    	    ArrayList<Edge<City>> kruskalMap = tour.getMap().kruskal();
+	    	    //FW
+	    	    double[][] fwCost  = tour.getCost().floydWarshall();
+	    	    double[][] fwMap  = tour.getCost().floydWarshall();
+	    	    
 	    	}
     	}
     	catch(NullPointerException npe) {

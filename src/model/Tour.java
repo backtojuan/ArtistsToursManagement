@@ -146,6 +146,13 @@ public class Tour {
 		br.close();
 	}
 	**/
+	public AdjacencyListGraph<City> getMap(){
+		return map;
+	}
+	
+	public AdjacencyListGraph<City> getCost(){
+		return cost;
+	}
 	@Override 
 	/**
 	 * This method gives the information for this object
