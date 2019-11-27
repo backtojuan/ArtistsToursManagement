@@ -1,0 +1,15 @@
+1,Mexico,Mexico-city
+2,USA,New-York
+3,Argentina,Buenos-aires
+4,Mexico,Monterrey
+5,Mexico,Guadalajara
+6,USA,Los-angeles
+7,Brasil,Rio-de-janeiro
+8,USA,chicago
+9,Brasil,Sao-paulo
+10,USA,Houston
+11,Colombia,Bogotá
+12,Chile,Santiago-de-chile
+13,Peru,Lima
+14,Uruguay,Montevideo
+15,Paraguay,Asunción

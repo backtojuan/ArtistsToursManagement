@@ -1,0 +1,15 @@
+1,China,Pekín
+2,Japan,Tokyo
+3,China,Shanghai
+4,Taiwan,Taipei
+5,Tailandia,Bangkok
+6,China,Hong-kong
+7,India,Bombay
+8,Sur-Korea,Seúl
+9,Singapur,Singapur
+10,Japan,Osaka
+11,Malasia,Kuala-lumpur
+12,Japan,Kioto
+13,Vietnam,Hanoi
+14,Pakistan,Islamabad
+15,Indonesia,Yakarta

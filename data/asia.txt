@@ -15,5 +15,5 @@
 15,Japan,Osaka,Japan,Kioto,60,10
 16,Singapur,Singapur,Malasia,Kuala-lumpur,355,35
 17,Singapur,Singapur,Indonesia,Yakarta,1269,130
-18,Malasia,Kuala-lumpur.Indonesia,Yakarta,1619,165
+18,Malasia,Kuala-lumpur,Indonesia,Yakarta,1619,165
 19,Japan,Tokyo,Japan,Kioto,457,45

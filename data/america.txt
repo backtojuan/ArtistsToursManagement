@@ -9,13 +9,13 @@
 9,Mexico,Monterrey,Mexico,Guadalajara,845,85
 10,Mexico,Guadalajara,Mexico,Mexico-city,481,50
 11,Mexico,Guadalajara,Colombia,Bogotá,3623,362
-12,Mexico,Mexico-city,3169,316
+12,Mexico,Mexico-city,Colombia,Bogotá,3169,316
 13,Colombia,Bogotá,Peru,Lima,2878,288
 14,Colombia,Bogotá,Brasil,Rio-de-janeiro,7769,776
 15,Colombia,Bogotá,Brasil,Sao-paulo,7868,786
 16,Peru,Lima,Brasil,Rio-de-janeiro,4824,488
 17,Peru,Lima,Chile,Santiago-de-chile,3349,335
-18,Brasil,Rio-de-janeiro,435,45
+18,Brasil,Rio-de-janeiro,Brasil,Sao-paulo,435,45
 19,Brasil,Rio-de-janeiro,Paraguay,Asunción,1802,180
 20,Chile,Santiago-de-chile,Argentina,Buenos-aires,1435,145
 21,Chile,Santiago-de-chile,Paraguay,Asunción,2139,215
