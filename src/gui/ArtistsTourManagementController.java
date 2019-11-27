@@ -117,14 +117,6 @@ public class ArtistsTourManagementController {
 	    	    }else if(continent.getValue().toString() == "EUROPE") {
 	    	    	image1.setImage(new Image("gui/imgs/europe_distances (2).png"));
 	    	    }
-	    	    /*
-	    	    //Kruskal
-	    	    ArrayList<Edge<City>> kruskalCost = tour.getCost().kruskal();
-	    	    ArrayList<Edge<City>> kruskalMap = tour.getMap().kruskal();
-	    	    //FW
-	    	    double[][] fwCost  = tour.getCost().floydWarshall();
-	    	    double[][] fwMap  = tour.getCost().floydWarshall();
-	    	    **/
 	    	}
     	}
     	catch(NullPointerException npe) {
@@ -237,7 +229,27 @@ public class ArtistsTourManagementController {
      * @param event
      */
     public void floyd(ActionEvent event) {
-
+    	double[][] fwMap  = tour.getCost().floydWarshall();
+    	String mensaje = "";
+    	for(int i = 0; i < fwMap.length; i++) {
+    		for(int j = 0; j < fwMap[i].length; j++) {
+    			mensaje+= (fwMap[i][j] + "  ||  ");
+    		}
+    		mensaje+= "\n";
+    	}
+    	min.setText(mensaje);
+    }
+    @FXML
+    void costsfloyd(ActionEvent event) {
+    	double[][] fwCost  = tour.getCost().floydWarshall();
+    	String mensaje = "";
+    	for(int i = 0; i < fwCost.length; i++) {
+    		for(int j = 0; j < fwCost[i].length; j++) {
+    			mensaje+= (fwCost[i][j] + " || ");
+    		}
+    		mensaje+= "\n";
+    	}
+    	min.setText(mensaje);
     }
     
 }

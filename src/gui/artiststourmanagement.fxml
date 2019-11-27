@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="960.0" styleClass="borderpane" stylesheets="@css/theme.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ArtistsTourManagementController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="722.0" prefWidth="963.0" styleClass="borderpane" stylesheets="@css/theme.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ArtistsTourManagementController">
    <top>
       <Pane prefHeight="88.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -168,12 +168,12 @@
                                     <Image url="@imgs/collage1.jpg" />
                                  </image>
                               </ImageView>
-                              <Label fx:id="tour" layoutX="360.0" layoutY="63.0" text="TOUR : ">
+                              <Label fx:id="tour1" layoutX="360.0" layoutY="63.0" text="TOUR : ">
                                  <font>
                                     <Font size="30.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="artist" layoutX="360.0" layoutY="201.0" text="ARTIST :">
+                              <Label fx:id="artist1" layoutX="360.0" layoutY="201.0" text="ARTIST :">
                                  <font>
                                     <Font size="30.0" />
                                  </font>
@@ -193,16 +193,37 @@
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <AnchorPane prefHeight="445.0" prefWidth="784.0">
+                        <AnchorPane prefHeight="685.0" prefWidth="792.0">
                            <children>
-                              <ImageView fx:id="image1" fitHeight="438.0" fitWidth="534.0" layoutX="223.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-                              <Label fx:id="min" layoutX="14.0" layoutY="26.0" prefHeight="396.0" prefWidth="307.0" />
+                              <TabPane layoutX="23.0" layoutY="34.0" prefHeight="499.0" prefWidth="732.0" tabClosingPolicy="UNAVAILABLE">
+                                <tabs>
+                                  <Tab text="Map">
+                                    <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="518.0" prefWidth="709.0">
+                                             <children>
+                                                <ImageView fx:id="image1" fitHeight="474.0" fitWidth="734.0" pickOnBounds="true" preserveRatio="true" />
+                                             </children>
+                                          </AnchorPane>
+                                    </content>
+                                  </Tab>
+                                  <Tab text="Text">
+                                    <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <Label fx:id="min" layoutY="6.0" prefHeight="477.0" prefWidth="733.0" />
+                                             </children>
+                                          </AnchorPane>
+                                    </content>
+                                  </Tab>
+                                </tabs>
+                              </TabPane>
                            </children>
                         </AnchorPane>
                         <Button layoutX="791.0" layoutY="14.0" mnemonicParsing="false" onAction="#costMap" prefHeight="34.0" prefWidth="112.0" text="See Cost's Map" />
                         <Button layoutX="791.0" layoutY="74.0" mnemonicParsing="false" onAction="#distanceMin" prefHeight="55.0" prefWidth="151.0" text="Minimum distance map" />
                         <Button layoutX="791.0" layoutY="146.0" mnemonicParsing="false" onAction="#costMin" prefHeight="55.0" prefWidth="151.0" text="Minimum cost map" />
                         <Button layoutX="791.0" layoutY="226.0" mnemonicParsing="false" onAction="#floyd" prefHeight="55.0" prefWidth="151.0" text="All minimum distances" />
+                        <Button layoutX="791.0" layoutY="298.0" mnemonicParsing="false" onAction="#costsfloyd" prefHeight="55.0" prefWidth="151.0" text="All minimum costs" />
                      </children>
                   </AnchorPane>
                </content></Tab>
