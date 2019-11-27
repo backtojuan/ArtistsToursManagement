@@ -18,6 +18,7 @@ import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import model.*;
 import datastructures.*;
@@ -31,6 +32,8 @@ import datastructures.*;
  * @version 1.0 - November/2019 
 */
 public class ArtistsTourManagementController {
+	@FXML
+    private ImageView image1;
 
     @FXML
     private ComboBox<Location> continent;
@@ -98,6 +101,17 @@ public class ArtistsTourManagementController {
 	    		
 	    		Artist artist = new Artist(name, labelname);
 	    		Tour tour = new Tour(continent.getValue(),tourName,initdate,finishdate,getPath());
+	    	    if(continent.getValue().toString() == "AFRICA") {
+	    	    	image1.setImage(new Image("gui/imgs/africa_distances (2).png"));
+	    	    }else if(continent.getValue().toString() == "AMERICA") {
+	    	    	image1.setImage(new Image("gui/imgs/america_distances (2).png"));
+	    	    }else if(continent.getValue().toString() == "ASIA") {
+	    	    	image1.setImage(new Image("gui/imgs/asia_distances (2).png"));
+	    	    }else if(continent.getValue().toString() == "OCEANIA") {
+	    	    	image1.setImage(new Image("gui/imgs/australia_distances (2).png"));
+	    	    }else if(continent.getValue().toString() == "EUROPE") {
+	    	    	image1.setImage(new Image("gui/imgs/europe_distances (2).png"));
+	    	    }
 	    	}
     	}
     	catch(NullPointerException npe) {
@@ -115,7 +129,20 @@ public class ArtistsTourManagementController {
     		dialogpane.getStylesheets().add("gui/css/theme.css");
     	}
     }
-    
+    @FXML
+    void costMap(ActionEvent event) {
+    	if(continent.getValue().toString() == "AFRICA") {
+	    	image1.setImage(new Image("gui/imgs/africa_cost (2).png"));
+	    }else if(continent.getValue().toString() == "AMERICA") {
+	    	image1.setImage(new Image("gui/imgs/america_cost (2).png"));
+	    }else if(continent.getValue().toString() == "ASIA") {
+	    	image1.setImage(new Image("gui/imgs/asia_costs (2).png"));
+	    }else if(continent.getValue().toString() == "OCEANIA") {
+	    	image1.setImage(new Image("gui/imgs/australia_cost (2).png"));
+	    }else if(continent.getValue().toString() == "EUROPE") {
+	    	image1.setImage(new Image("gui/imgs/europe_costos (2).png"));
+	    }
+    }
     @FXML
     /**
      * This method sets the current path from where the cities are going to be loaded

@@ -48,7 +48,7 @@ public class Tour {
 		this.name = name;
 		this.initDate = initDate;
 		this.finalDate = finalDate;
-		load(path);
+		//load(path);
 	}
 	
 	/**
@@ -114,6 +114,7 @@ public class Tour {
 	 * @param path the path from where the cities are going to be load
 	 * @throws IOException in the case that the file that contains the cities cannot be loaded
 	 */
+	/*
 	public void load(String path) throws IOException{
 		
 		BufferedReader br = new BufferedReader(new FileReader(new File(path)));
@@ -144,7 +145,7 @@ public class Tour {
 		}		
 		br.close();
 	}
-	
+	**/
 	@Override 
 	/**
 	 * This method gives the information for this object
