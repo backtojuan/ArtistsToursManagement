@@ -180,8 +180,13 @@ public class ArtistsTourManagementController {
     	}
     	return path;
     }
+    
     @FXML
-    void costMin(ActionEvent event) {
+    /**
+     * 
+     * @param event
+     */
+    public void costMin(ActionEvent event) {
     	ArrayList<Edge<City>> kruskalCost = tour.getCost().kruskal();
     	String mensaje = "";
     	for(int i = 0; i < kruskalCost.size(); i++) {
@@ -192,7 +197,11 @@ public class ArtistsTourManagementController {
     }
 
     @FXML
-    void distanceMin(ActionEvent event) {
+    /**
+     * 
+     * @param event
+     */
+    public void distanceMin(ActionEvent event) {
     	ArrayList<Edge<City>> kruskalMap = tour.getMap().kruskal();
     	String mensaje = "";
     	for(int i = 0; i < kruskalMap.size(); i++) {
@@ -201,8 +210,13 @@ public class ArtistsTourManagementController {
     	}
     	min.setText(mensaje);
     }
+    
     @FXML
-    void floyd(ActionEvent event) {
+    /**
+     * 
+     * @param event
+     */
+    public void floyd(ActionEvent event) {
 
     }
     

@@ -164,8 +164,6 @@ public class AdjacencyMatrixGraph<Value> implements GraphInterface<Value>{
 		ArrayList<Vertex<Value>> adjacentvertices = new ArrayList<>();
 		int key = vertex.getKey()-1;
 		for (int i = 0; i < adjacencymatrix.get(key).size(); i++) {
-			System.out.println("Size" + adjacencymatrix.get(key).size());
-			System.out.println(adjacencymatrix.get(key).get(i));
 			int a = adjacencymatrix.get(key).get(i);
 			if(a == 1) {
 				adjacentvertices.add(vertices.get(i));

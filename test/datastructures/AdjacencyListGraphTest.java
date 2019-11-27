@@ -311,13 +311,7 @@ public class AdjacencyListGraphTest {
 	public void testPrim() {
 		setUpScenary5();
 		ArrayList<Vertex<City>> prim = map.prim(map.getVertices().get(0));
-		
-		assertNotNull(prim, "The resultant list is null");
-		for (int i = 0; i < prim.size(); i++) {
-			//System.out.println(prim.get(i));
-			//System.out.println(prim.get(i).getCost());
-		}
-		
+		assertNotNull(prim, "The resultant list is null");	
 	}
 	
 	@Test
@@ -332,8 +326,11 @@ public class AdjacencyListGraphTest {
 		assertNotNull(kruskal, "The resultant list is null");
 		for (int i = 0; i < kruskal.size(); i++) {
 			assertNotNull(kruskal.get(i), "The edge is null");
-			
 		}
+		assertEquals(325.0,kruskal.get(0).getWeight(),"The minimun costs is not the expected");
+		assertEquals(500.0,kruskal.get(1).getWeight(),"The minimun costs is not the expected");
+		assertEquals(600.0,kruskal.get(2).getWeight(),"The minimun costs is not the expected");
+		assertEquals(850.0,kruskal.get(3).getWeight(),"The minimun costs is not the expected");
 	}
 	
 	@Test
@@ -344,11 +341,6 @@ public class AdjacencyListGraphTest {
 	 */
 	public void testDijkstra() {
 		setUpScenary5();
-		/**ArrayList<Edge<City>> dijkstra = map.dijkstra(map.getVertices().get(0));
-		assertNotNull(dijkstra,"The resultant list is null");
-		for (int i = 0; i < dijkstra.size(); i++) {
-			System.out.println(dijkstra.get(i));
-		}*/
 	}
 	
 	@Test
