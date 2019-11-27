@@ -204,14 +204,14 @@ public class AdjacencyMatrixGraphTest {
 		for (int i = 0; i < map.getAdjacencyMatrix().size(); i++) {
 			for (int j = 0; j < map.getAdjacencyMatrix().get(i).size(); j++) {
 				assertTrue(!map.getAdjacencyMatrix().get(i).isEmpty(), "The adjacent vertex is empty");
-				//assertEquals(0,map.getAdjacencyMatrix().get(i).get(i),"The origin vertex is different");
+				assertTrue(map.getAdjacencyMatrix().get(i).get(i)==0,"The origin vertex is different");
 			}
 		}
 		
-		//assertEquals(1,map.getAdjacencyMatrix().get(0).get(2),"This vertex is not adjacent");
-		//assertEquals(1,map.getAdjacencyMatrix().get(2).get(0),"This vertex is not adjacent");
-		//assertEquals(1,map.getAdjacencyMatrix().get(2).get(1),"This vertex is not adjacent");
-		//assertEquals(1,map.getAdjacencyMatrix().get(4).get(3),"This vertex is not adjacent");
+		assertTrue(map.getAdjacencyMatrix().get(0).get(2)==1,"This vertex is not adjacent");
+		assertTrue(map.getAdjacencyMatrix().get(2).get(0)==1,"This vertex is not adjacent");
+		assertTrue(map.getAdjacencyMatrix().get(2).get(1)==1,"This vertex is not adjacent");
+		assertTrue(map.getAdjacencyMatrix().get(4).get(3)==1,"This vertex is not adjacent");
 	}
 	
 	@Test
@@ -272,12 +272,12 @@ public class AdjacencyMatrixGraphTest {
 	 */
 	public void testPrim() {
 		setUpScenary5();
-		/**double[] prim = map.prim(map.getVertices().get(0));
+		double[] prim = map.prim(map.getVertices().get(0));
 		
 		assertNotNull(prim, "The resultant array is null");
 		for (int i = 0; i < prim.length; i++) {
 			System.out.println(prim[i]);
-		}*/
+		}
 	}
 	
 	@Test

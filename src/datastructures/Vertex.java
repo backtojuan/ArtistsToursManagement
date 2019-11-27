@@ -15,6 +15,8 @@ public class Vertex<Value>{
 	//Attributes for BFS
 	private int distance;
 	
+	private double cost;
+	
 	//Attributtes for DFS
 	private int initialtime;
 	private int finishtime;
@@ -51,7 +53,16 @@ public class Vertex<Value>{
 	public int getDistance() {
 		return distance;
 	}
-
+	
+	/**
+	 * This method returns the cost until this vertex
+	 * <b>Pre:</b> the graph exists
+	 * @return the cost until this vertex
+	 */
+	public double getCost() {
+		return cost;
+	}
+	
 	/**
 	 * This method returns the key(index) for this vertex
 	 * <b>Pre:</b> the graph exists
@@ -120,6 +131,16 @@ public class Vertex<Value>{
 	 */
 	public void setDistance(int distance) {
 		this.distance = distance;
+	}
+	
+	/**
+	 * This method sets the cost for this vertex when necessary
+	 * <b>Pre:</b> the graph exists
+	 * <b>Pos:</b> the cost of this vertex has changed
+	 * @param distance the new cost for this vertex
+	 */
+	public void setCost(double cost) {
+		this.cost = cost;
 	}
 	
 	/**

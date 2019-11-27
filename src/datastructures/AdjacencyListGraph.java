@@ -29,10 +29,10 @@ public class AdjacencyListGraph<Value> implements GraphInterface<Value> {
 	@SuppressWarnings("unchecked")
 	public AdjacencyListGraph(int totalvertices) {
 		this.totalvertices = totalvertices;
-		vertices = new ArrayList<>();
+		vertices = new ArrayList<Vertex<Value>>();
 		adjacencylist = new LinkedList[totalvertices];
 		for (int i = 0; i < adjacencylist.length; i++) {
-			adjacencylist[i] = new LinkedList<>();
+			adjacencylist[i] = new LinkedList<Edge<Value>>();
 		}
 	}
 
@@ -87,13 +87,17 @@ public class AdjacencyListGraph<Value> implements GraphInterface<Value> {
 		double[][] weights = new double[vertices.size()][vertices.size()];
 		for (int i = 0; i < weights.length; i++) {
 			for (int j = 0; j < weights.length; j++) {
-				weights[i][j] = Double.MAX_VALUE;
+				if(i==j) {
+					weights[i][j] = 0.0;
+				}
+				else {
+					weights[i][j] = Double.MAX_VALUE;
+				}
 			}
 		}
 		for (int i = 0; i < vertices.size(); i++) {
-			weights[i][i] = 0;
 			Vertex<Value> u = vertices.get(i);
-			LinkedList<Edge<Value>> adjacent = adjacencylist[u.getKey()-1];
+			LinkedList<Edge<Value>> adjacent = adjacencylist[i];
 			for (int j = 0; j < adjacent.size(); j++) {
 				Edge<Value> e = adjacent.get(j);
 				Vertex<Value> v = e.getV();
@@ -260,41 +264,38 @@ public class AdjacencyListGraph<Value> implements GraphInterface<Value> {
 	 * @param 
 	 * @return an array of vertices with the minimum cost to cover all vertices in this graph
 	 */
-	@SuppressWarnings("unchecked")
-	public double[] prim(Vertex<Value> source) {
+	public ArrayList<Vertex<Value>> prim(Vertex<Value> source) {
 
-		double[] keys = new double[totalvertices];
-		Vertex<Value>[] color = new Vertex[totalvertices];
-		Vertex<Value>[] pred = new Vertex[totalvertices];
-
+		ArrayList<Vertex<Value>> costs = new ArrayList<>();
 		int key = source.getKey();
 
 		for(int i = 0; i<totalvertices; i++) {
-			keys[i] = Integer.MAX_VALUE;
-			color[i] = vertices.get(i);
-			color[i].setColor(Vertex.WHITE);
-			pred[i] = vertices.get(i);
-			pred[i].setPred(null);
+			Vertex<Value> vertex = vertices.get(i);
+			vertex.setCost(Double.MAX_VALUE);
+			vertex.setColor(Vertex.WHITE);
+			vertex.setPred(null);
+			costs.add(vertex);
 		}
-		keys[0] = 0;
+		costs.get(0).setCost(0.0);
+		costs.get(0).setPred(null);
 		PriorityQueue<Vertex<Value>> queue = new PriorityQueue<>(new VertexComparator<Value>());
-		for(Vertex<Value> vertex : vertices) {
+		for(Vertex<Value> vertex : costs) {
 			queue.offer(vertex);
 		}
 		while(!queue.isEmpty()) {
 			Vertex<Value> u = queue.poll();
 			for (Edge<Value> e : adjacencylist[key-1]) {
 				Vertex<Value> v = e.getV();
-				if(v.getColor().equals(Vertex.WHITE) && e.getWeight() < keys[v.getKey()-1]) {
+				if(v.getColor().equals(Vertex.WHITE) && e.getWeight() < v.getCost()) {
 					queue.remove(v);
-					keys[v.getKey()-1] = e.getWeight();
 					queue.add(v);
+					costs.get(v.getKey()-1).setCost(e.getWeight());;
 					v.setPred(u);
 				}
 				u.setColor(Vertex.BLACK);
 			}
 		}
-		return keys;
+		return costs;
 	}
 
 	/**

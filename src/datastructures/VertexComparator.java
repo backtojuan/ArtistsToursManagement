@@ -24,10 +24,10 @@ public class VertexComparator<Value> implements Comparator<Vertex<Value>>{
 	 * @returns an Integer number which indicates the relation of order between this vertices
 	 */
 	public int compare(Vertex<Value> vertex1, Vertex<Value> vertex2) {
-		if(vertex1.getDistance()>vertex2.getDistance()) {
+		if(vertex1.getCost()>vertex2.getCost()) {
 			return 1;
 		}
-		else if(vertex1.getDistance()<vertex2.getDistance()) {
+		else if(vertex1.getCost()<vertex2.getCost()) {
 			return -1;
 		}
 		else {

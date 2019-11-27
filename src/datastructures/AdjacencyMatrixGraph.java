@@ -29,12 +29,9 @@ public class AdjacencyMatrixGraph<Value> implements GraphInterface<Value>{
 	 */
 	public AdjacencyMatrixGraph(int totalvertices) {
 		this.totalvertices = totalvertices;
-		vertices = new ArrayList<>();
-		adjacencymatrix = new ArrayList<>();
-		weightsmatrix = new ArrayList<>();
-		for (int i = 0; i < adjacencymatrix.size(); i++) {
-			adjacencymatrix.add(i, new ArrayList<>());
-		}
+		vertices = new ArrayList<Vertex<Value>>();
+		adjacencymatrix = new ArrayList<ArrayList<Integer>>();
+		weightsmatrix = new ArrayList<ArrayList<Double>>();
 	}
 	
 	/**
@@ -167,6 +164,8 @@ public class AdjacencyMatrixGraph<Value> implements GraphInterface<Value>{
 		ArrayList<Vertex<Value>> adjacentvertices = new ArrayList<>();
 		int key = vertex.getKey()-1;
 		for (int i = 0; i < adjacencymatrix.get(key).size(); i++) {
+			System.out.println("Size" + adjacencymatrix.get(key).size());
+			System.out.println(adjacencymatrix.get(key).get(i));
 			int a = adjacencymatrix.get(key).get(i);
 			if(a == 1) {
 				adjacentvertices.add(vertices.get(i));

@@ -310,12 +310,14 @@ public class AdjacencyListGraphTest {
 	 */
 	public void testPrim() {
 		setUpScenary5();
-		double[] prim = map.prim(map.getVertices().get(0));
+		ArrayList<Vertex<City>> prim = map.prim(map.getVertices().get(0));
 		
-		assertNotNull(prim, "The resultant array is null");
-		for (int i = 0; i < prim.length; i++) {
-			System.out.println(prim[i]);
+		assertNotNull(prim, "The resultant list is null");
+		for (int i = 0; i < prim.size(); i++) {
+			//System.out.println(prim.get(i));
+			//System.out.println(prim.get(i).getCost());
 		}
+		
 	}
 	
 	@Test
@@ -330,6 +332,7 @@ public class AdjacencyListGraphTest {
 		assertNotNull(kruskal, "The resultant list is null");
 		for (int i = 0; i < kruskal.size(); i++) {
 			assertNotNull(kruskal.get(i), "The edge is null");
+			
 		}
 	}
 	
